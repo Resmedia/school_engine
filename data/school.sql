@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 25, 2019 at 12:08 AM
+-- Generation Time: Aug 29, 2019 at 11:47 AM
 -- Server version: 5.6.33
 -- PHP Version: 7.1.8
 
@@ -41,9 +41,9 @@ CREATE TABLE `catalog` (
 --
 
 INSERT INTO `catalog` (`id`, `name`, `full_desc`, `price`, `views`, `time_create`, `time_update`) VALUES
-(1, 'Стружка металлическая', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Proin eget tortor risus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.\r\n\r\nCurabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh. Pellentesque in ipsum id orci porta dapibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Nulla porttitor accumsan tincidunt.', 95, 480, 1566590768, 0),
-(2, 'Замок амбарный', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Proin eget tortor risus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.\r\n\r\nCurabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh. Pellentesque in ipsum id orci porta dapibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Nulla porttitor accumsan tincidunt.', 100, 99, 1566590769, 0),
-(3, 'Аквариум зеленый в полоску', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Proin eget tortor risus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.\r\n\r\nCurabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh. Pellentesque in ipsum id orci porta dapibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Nulla porttitor accumsan tincidunt.', 176, 40, 1566590769, 1566590769);
+(1, 'Стружка металлическая', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Proin eget tortor risus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.\r\n\r\nCurabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh. Pellentesque in ipsum id orci porta dapibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Nulla porttitor accumsan tincidunt.', 95, 486, 1566590768, 0),
+(2, 'Замок амбарный', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Proin eget tortor risus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.\r\n\r\nCurabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh. Pellentesque in ipsum id orci porta dapibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Nulla porttitor accumsan tincidunt.', 100, 103, 1566590769, 0),
+(3, 'Аквариум зеленый в полоску', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Proin eget tortor risus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.\r\n\r\nCurabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh. Pellentesque in ipsum id orci porta dapibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Nulla porttitor accumsan tincidunt.', 176, 44, 1566590769, 1566590769);
 
 -- --------------------------------------------------------
 
@@ -74,8 +74,11 @@ INSERT INTO `feedback` (`id`, `model_id`, `model`, `user`, `text`, `time_create`
 (23, 1, 'catalog', 'Bobo Tutu', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Donec sollicitudin molestie malesuada. Donec sollicitudin molestie malesuada.\n\nDonec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus. Curabitur aliquet quam id dui posuere blandit.', 1566669381, 1566669381),
 (24, 3, 'catalog', 'Абрам Линкольн', 'Таким образом рамки и место обучения кадров позволяет выполнять важные задания по разработке форм развития. Таким образом постоянное информационно-пропагандистское обеспечение нашей деятельности требуют определения и уточнения существенных финансовых и административных условий. Товарищи! сложившаяся структура организации позволяет оценить значение новых предложений. Идейные соображения высшего порядка, а также постоянный количественный рост и сфера нашей активности представляет собой интересный эксперимент проверки позиций, занимаемых участниками в отношении поставленных задач.\n\nРазнообразный и богатый опыт консультация с широким активом требуют определения и уточнения позиций, занимаемых участниками в отношении поставленных задач. Значимость этих проблем настолько очевидна, что новая модель организационной деятельности позволяет выполнять важные задания по разработке новых предложений.', 1566675844, 1566675844),
 (25, 2, 'images', 'Вау Пну', 'Товарищи! постоянный количественный рост и сфера нашей активности требуют от нас анализа системы обучения кадров, соответствует насущным потребностям. С другой стороны реализация намеченных плановых заданий способствует подготовки и реализации дальнейших направлений развития. Равным образом реализация намеченных плановых заданий позволяет выполнять важные задания по разработке форм развития. Повседневная практика показывает, что постоянный количественный рост и сфера нашей активности играет важную роль в формировании позиций, занимаемых участниками в отношении поставленных задач.', 1566676697, 1566676697),
-(26, 1, 'images', '777 Gustov Bains!', 'Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec sollicitudin molestie malesuada. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.\n\nPellentesque in ipsum id orci porta dapibus. Donec sollicitudin molestie malesuada. Quisque velit nisi, pretium ut lacinia in, elementum id enim.\n\nCurabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.', 1566678169, 1566680577),
-(28, 1, 'images', 'Viktor Gurd 666', 'Pellentesque in ipsum id orci porta dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget tortor risus.\n\nNulla porttitor accumsan tincidunt. Donec sollicitudin molestie malesuada. Proin eget tortor risus.\n\nCurabitur non nulla sit amet nisl tempus convallis quis ac lectus. Nulla quis lorem ut libero malesuada feugiat. Vivamus suscipit tortor eget felis porttitor volutpat.', 1566680563, 1566680584);
+(28, 1, 'images', 'Viktor Gurd 66699', 'Pellentesque in ipsum id orci porta dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget tortor risus.\n\nNulla porttitor accumsan tincidunt. Donec sollicitudin molestie malesuada. Proin eget tortor risus.\n\nCurabitur non nulla sit amet nisl tempus convallis quis ac lectus. Nulla quis lorem ut libero malesuada feugiat. Vivamus suscipit tortor eget felis porttitor volutpat.', 1566680563, 1566724869),
+(29, 2, 'catalog', 'Мила', 'Привет всем хорошая тема', 1566707171, 1566707171),
+(30, 9, 'images', 'Валера', 'Отличный кораблик!', 1566707349, 1566707349),
+(31, 3, 'catalog', 'Василий!!!', 'Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама Грумичама ', 1566724898, 1566724898),
+(32, 14, 'images', 'Goobr Danim', 'Alta intero bur mentos are valido! En quarte fi den castel! Repinos asdastos vertu! Alta intero bur mentos are valido! Repinos asdastos vertu! Alta intero bur mentos are valido! En quarte fi den castel! Repinos asdastos vertu! Alta intero bur mentos are valido! En quarte fi den castel! Repinos asdastos vertu!  En quarte fi den castel! Repinos asdastos vertu! ', 1566803912, 1566803912);
 
 -- --------------------------------------------------------
 
@@ -86,6 +89,7 @@ INSERT INTO `feedback` (`id`, `model_id`, `model`, `user`, `text`, `time_create`
 CREATE TABLE `gallery_images` (
   `id` int(11) NOT NULL,
   `model_id` int(11) NOT NULL DEFAULT '0',
+  `model` varchar(255) DEFAULT NULL,
   `url` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `time_create` int(255) NOT NULL DEFAULT '0',
@@ -96,16 +100,16 @@ CREATE TABLE `gallery_images` (
 -- Dumping data for table `gallery_images`
 --
 
-INSERT INTO `gallery_images` (`id`, `model_id`, `url`, `name`, `time_create`, `time_update`) VALUES
-(1, 1, '01.jpg', 'Альт рисунка 1', 1566669799, 1566669799),
-(2, 1, '02.jpg', 'Альт рисунка 2', 1566669799, 1566669799),
-(3, 1, '03.jpg', 'Альт рисунка 3', 1566669799, 1566669799),
-(4, 2, '04.jpg', 'Альт рисунка 4', 1566669799, 1566669799),
-(5, 2, '05.jpg', 'Альт рисунка 5', 1566669799, 1566669799),
-(6, 2, '06.jpg', 'Альт рисунка 6', 1566669799, 1566669799),
-(7, 3, '07.jpg', 'Альт рисунка 7', 1566669799, 1566669799),
-(8, 3, '08.jpg', 'Альт рисунка 8', 1566669799, 1566669799),
-(9, 3, '09.jpg', 'Альт рисунка 9', 1566669799, 1566669799);
+INSERT INTO `gallery_images` (`id`, `model_id`, `model`, `url`, `name`, `time_create`, `time_update`) VALUES
+(1, 1, 'catalog', '01.jpg', 'Альт рисунка 1', 1566669799, 1566669799),
+(2, 1, 'catalog', '02.jpg', 'Альт рисунка 2', 1566669799, 1566669799),
+(3, 1, 'catalog', '03.jpg', 'Альт рисунка 3', 1566669799, 1566669799),
+(4, 2, 'catalog', '04.jpg', 'Альт рисунка 4', 1566669799, 1566669799),
+(5, 2, 'catalog', '05.jpg', 'Альт рисунка 5', 1566669799, 1566669799),
+(6, 2, 'catalog', '06.jpg', 'Альт рисунка 6', 1566669799, 1566669799),
+(7, 3, 'catalog', '07.jpg', 'Альт рисунка 7', 1566669799, 1566669799),
+(8, 3, 'catalog', '08.jpg', 'Альт рисунка 8', 1566669799, 1566669799),
+(9, 3, 'catalog', '09.jpg', 'Альт рисунка 9', 1566669799, 1566669799);
 
 -- --------------------------------------------------------
 
@@ -126,20 +130,20 @@ CREATE TABLE `images` (
 --
 
 INSERT INTO `images` (`id`, `url`, `likes`, `views`, `time_create`) VALUES
-(1, '01.jpg', 322, 1055, 1566467742),
+(1, '01.jpg', 322, 1059, 1566467742),
 (2, '02.jpg', 24, 15, 1566467742),
 (3, '03.jpg', 5, 25, 1566467742),
-(4, '04.jpg', 0, 1, 1566467742),
+(4, '04.jpg', 9, 2, 1566467742),
 (5, '05.jpg', 0, 0, 1566467742),
-(6, '06.jpg', 0, 0, 1566467742),
+(6, '06.jpg', 0, 1, 1566467742),
 (7, '07.jpg', 1, 0, 1566467742),
 (8, '08.jpg', 0, 0, 1566467742),
-(9, '09.jpg', 14, 6, 1566467742),
+(9, '09.jpg', 14, 8, 1566467742),
 (10, '10.jpg', 0, 0, 1566467742),
 (11, '11.jpg', 0, 0, 1566467742),
 (12, '12.jpg', 7, 13, 1566467742),
 (13, '13.jpg', 10, 25, 1566467742),
-(14, '14.jpg', 204, 34, 1566467742),
+(14, '14.jpg', 204, 36, 1566467742),
 (15, '15.jpg', 0, 0, 1566467742);
 
 -- --------------------------------------------------------
@@ -152,22 +156,24 @@ CREATE TABLE `menu` (
   `id` int(11) NOT NULL,
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL
+  `url` varchar(255) DEFAULT NULL,
+  `position` int(11) NOT NULL,
+  `status` smallint(2) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `menu`
 --
 
-INSERT INTO `menu` (`id`, `parent_id`, `name`, `url`) VALUES
-(1, 0, 'Главная', '/'),
-(2, 0, 'Каталог', '/catalog'),
-(4, 0, 'Контакты', '/contacts'),
-(5, 0, 'Отзывы', '/feedback'),
-(7, 2, 'Каталог 1', '/catalog_1'),
-(8, 2, 'Каталог 2', '/catalog_2'),
-(9, 2, 'Каталог 3', '/catalog_3'),
-(10, 0, 'Галерея', '/gallery');
+INSERT INTO `menu` (`id`, `parent_id`, `name`, `url`, `position`, `status`) VALUES
+(1, 0, 'Главная', '/', 1, 1),
+(2, 0, 'Каталог', '/catalog', 2, 1),
+(4, 0, 'Контакты', '/contacts', 5, 1),
+(5, 0, 'Отзывы', '/feedback', 4, 0),
+(7, 2, 'Каталог 1', '/catalog_1', 0, 1),
+(8, 2, 'Каталог 2', '/catalog_2', 0, 1),
+(9, 2, 'Каталог 3', '/catalog_3', 0, 1),
+(10, 0, 'Галерея', '/gallery', 3, 1);
 
 --
 -- Indexes for dumped tables
@@ -216,7 +222,7 @@ ALTER TABLE `catalog`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `gallery_images`
 --
