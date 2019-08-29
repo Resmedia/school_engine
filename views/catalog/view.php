@@ -8,7 +8,6 @@
  * @var $messages
  * @var $item
  */
-include_once TEMPLATES_DIR . "FeedBackMessage.php";
 
 $model = 'catalog';
 
