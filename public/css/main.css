@@ -19,8 +19,28 @@ hr {
 textarea {
   resize: vertical; }
 
+.form-control {
+  font-size: 1em;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #6e6e6e;
+  width: 97%;
+  margin-bottom: 20px; }
+
+.form-container {
+  max-width: 35%;
+  margin: 0 auto;
+  padding: 10% 0; }
+
 .text-center {
   text-align: center; }
+
+.registration-link {
+  display: block;
+  margin: 30px 0; }
+
+.text-default {
+  color: #6e6e6e; }
 
 .header {
   padding: 3px;

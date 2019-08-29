@@ -12,6 +12,7 @@ define("TEMPLATES_DIR", "../views/");
 define("LAYOUTS_DIR", 'layout/');
 define("IMAGES_DIR", "/gallery_img/");
 
+include_once "../controllers/auth.php";
 include_once "../views/widgets/FeedBackMessage.php";
 include_once "../controllers/controller.php";
 include_once "../controllers/messages.php";

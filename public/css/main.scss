@@ -53,10 +53,29 @@ hr {
 textarea{
   resize: vertical;
 }
+.form-control {
+  font-size: 1em;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid $gray;
+  width: 97%;
+  margin-bottom: 20px;
+}
+.form-container {
+  max-width: 35%;
+  margin: 0 auto;
+  padding: 10% 0;
+}
 .text-center {
   text-align: center;
 }
-
+.registration-link {
+  display: block;
+  margin: 30px 0;
+}
+.text-default{
+  color: $gray;
+}
 .header {
   padding: 3px;
   @include shadow(0 0 2px rgba(191, 191, 191, 0.77))

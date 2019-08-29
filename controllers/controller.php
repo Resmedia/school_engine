@@ -16,6 +16,27 @@ function prepareVariables($url, $id, $post)
             ];
             break;
 
+        case '/login':
+            $params = [
+                'page' => 'user/login',
+                'result' => $post ? login($post['email'], $post['pass']) : '',
+                'user' => getAuthUser(),
+            ];
+            break;
+
+        case '/logout':
+            logout();
+            exit();
+            break;
+
+        case '/registration':
+            $params = [
+                'page' => 'user/registration',
+                'result' => $post ? signUp($post['name'], $post['email'], $post['pass']) : '',
+                'user' => getAuthUser(),
+            ];
+            break;
+
         case "/gallery/$id":
             if (getBdItem($id, 'images')) {
                 $params = [
@@ -60,6 +81,20 @@ function prepareVariables($url, $id, $post)
             }
             break;
 
+        case "/contacts":
+            if (getBdItem('contacts', 'pages')) {
+                $params = [
+                    'page' => 'page/contacts',
+                    'item' => getBdItem('contacts', 'pages'),
+                ];
+            } else {
+                $params = [
+                    'page' => 'page/error',
+                    'code' => 404,
+                ];
+            }
+            break;
+
         case "/api/message":
             $result = actionMessage(
                 (string)$post['action'],
@@ -82,20 +117,6 @@ function prepareVariables($url, $id, $post)
         case "/api/like":
             echo setLike((int)$post['id'], (string)$post['element']);
             exit();
-            break;
-
-        case "/contacts":
-            if (getBdItem('contacts', 'pages')) {
-                $params = [
-                    'page' => 'page/contacts',
-                    'item' => getBdItem('contacts', 'pages'),
-                ];
-            } else {
-                $params = [
-                    'page' => 'page/error',
-                    'code' => 404,
-                ];
-            }
             break;
 
         default:
