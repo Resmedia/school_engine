@@ -1,0 +1,1 @@
+<h1 class="text-center">Отзывы</h1>
