@@ -10,9 +10,11 @@
  */
 include_once "FeedBackMessage.php";
 
+$model = 'catalog';
+
 $messages = (object)$messages;
 $item = (object)$item;
-$images = getCatalogImages($item->id);
+$images = getImages($item->id, $model);
 
 $feedback = new FeedBackMessage();
 $feedback->id = $item->id;

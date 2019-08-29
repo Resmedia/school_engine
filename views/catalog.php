@@ -2,7 +2,7 @@
 /**
  * @var $catalog ../public/index.php
  */
-
+$model = 'catalog';
 ?>
 <h1 class="text-center">
     <?= $name ?: '' ?>
@@ -11,7 +11,7 @@
 <div class="catalog">
     <?php foreach ($catalog as $item):
         $object = (object)$item;
-        $images = getCatalogImages($object->id);
+        $images = getImages($object->id, $model);
         ?>
         <a class="catalog-item" href="/catalog/<?= $object->id ?>">
             <img class="item-img" alt="img" src="<?= IMAGES_DIR . 'small/' . $images[0]['url'] ?>">

@@ -18,7 +18,7 @@ if ($hour > 0 && $hour < 6) {
 
 $text = '<p class="text-center"> Время:' . $date->format(' H:i') . '<br /> <h3 class="text-center">' . $welcome . '</h3></p>';
 $name = 'Evgenii Rogozhuk';
-$desc = 'This is home work lesson 4';
+$desc = 'This is home work engine PHP 1';
 ?>
 <h1 class="text-center">
     <?= $name ?>
