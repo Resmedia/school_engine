@@ -4,8 +4,6 @@
  */
 function prepareVariables($url, $id, $post)
 {
-    $params = [];
-
     switch ($url) {
         case '/':
             $params = [];
@@ -13,7 +11,7 @@ function prepareVariables($url, $id, $post)
 
         case '/gallery':
             $params = [
-                'page' => 'gallery',
+                'page' => 'gallery/index',
                 'images' => getBdItems('images', 'likes', 'DESC')
             ];
             break;
@@ -21,7 +19,7 @@ function prepareVariables($url, $id, $post)
         case "/gallery/$id":
             if (getBdItem($id, 'images')) {
                 $params = [
-                    'page' => 'gallery_view',
+                    'page' => 'gallery/view',
                     'messages' => [
                         'message' => '',
                         'items' => getFeedBackMessages(+$id, 'images')
@@ -30,7 +28,7 @@ function prepareVariables($url, $id, $post)
                 ];
             } else {
                 $params = [
-                    'page' => 'error',
+                    'page' => 'page/error',
                     'code' => 404,
                 ];
             }
@@ -38,7 +36,7 @@ function prepareVariables($url, $id, $post)
 
         case '/catalog':
             $params = [
-                'page' => 'catalog',
+                'page' => 'catalog/index',
                 'catalog' => getBdItems('catalog', 'id', 'ASC'),
                 'name' => "Каталог товаров"
             ];
@@ -47,7 +45,7 @@ function prepareVariables($url, $id, $post)
         case "/catalog/$id":
             if (getBdItem($id, 'catalog')) {
                 $params = [
-                    'page' => 'catalog_view',
+                    'page' => 'catalog/view',
                     'messages' => [
                         'message' => '',
                         'items' => getFeedBackMessages(+$id, 'catalog')
@@ -56,7 +54,7 @@ function prepareVariables($url, $id, $post)
                 ];
             } else {
                 $params = [
-                    'page' => 'error',
+                    'page' => 'page/error',
                     'code' => 404,
                 ];
             }
@@ -86,9 +84,23 @@ function prepareVariables($url, $id, $post)
             exit();
             break;
 
+        case "/contacts":
+            if (getBdItem('contacts', 'pages')) {
+                $params = [
+                    'page' => 'page/contacts',
+                    'item' => getBdItem('contacts', 'pages'),
+                ];
+            } else {
+                $params = [
+                    'page' => 'page/error',
+                    'code' => 404,
+                ];
+            }
+            break;
+
         default:
             $params = [
-                'page' => 'error',
+                'page' => 'page/error',
                 'code' => 404,
             ];
     }

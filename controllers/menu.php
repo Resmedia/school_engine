@@ -5,8 +5,6 @@
  * Date: 29.08.19
  * Time: 11:12
  */
-const STATUS_PUBLISHED = 1;
-
 function renderMenu(array $items)
 {
     $result = "";

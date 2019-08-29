@@ -5,10 +5,10 @@
  * Date: 24.08.19
  * Time: 8:33
  *
- * @var $messages /engine/functions
- * @var $item /engine/functions
+ * @var $messages
+ * @var $item
  */
-include_once "FeedBackMessage.php";
+include_once TEMPLATES_DIR . "FeedBackMessage.php";
 
 $model = 'catalog';
 

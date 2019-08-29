@@ -6,6 +6,8 @@ define('USER', 'root');
 define('PASS', 'root');
 define('DB', 'school');
 
+const STATUS_PUBLISHED = 1;
+
 define("TEMPLATES_DIR", "../views/");
 define("LAYOUTS_DIR", 'layout/');
 define("IMAGES_DIR", "/gallery_img/");

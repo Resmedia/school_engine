@@ -20,7 +20,11 @@ function getImages(string $id, string $model): array
 
 function getBdItem($id, $element)
 {
-    $item = getAssocResult("SELECT * FROM $element WHERE id = {$id}");
+    if(is_numeric($id)){
+        $item = getAssocResult("SELECT * FROM $element WHERE `id` = '$id'");
+    } else {
+        $item = getAssocResult("SELECT * FROM $element WHERE `url` = '$id'");
+    }
     return $item;
 }
 

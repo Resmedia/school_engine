@@ -7,7 +7,7 @@
  *
  * @var $image
  */
-include_once "FeedBackMessage.php";
+include_once TEMPLATES_DIR . "FeedBackMessage.php";
 
 $item = (object)$image;
 $messages = (object)$messages;
