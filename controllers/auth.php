@@ -34,10 +34,9 @@ function logout()
     header("Location: /");
 }
 
-function login($email, $password)
+function login(string $email, string $password)
 {
     $email = strip_tags(stripslashes($email));
-
     $email = preg_replace('/\s+/', '', $email);
 
     if($email && $password) {

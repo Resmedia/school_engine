@@ -6,6 +6,8 @@
  * Time: 23:26
  */
 
+// TODO make it all close fore all people, open only for registered users
+
 class FeedBackMessage
 {
     public $messages;
