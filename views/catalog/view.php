@@ -51,7 +51,7 @@ $feedback->messages = $messages;
         <div class="info-item info-desc">
             <?= $item->full_desc ?>
         </div>
-        <div id="add-cart" class="btn btn-success pull-left" data-id="<?= $item->id ?>">
+        <div id="add-to-cart" class="btn btn-success pull-left" data-id="<?= $item->id ?>">
             Добавить в карзину
         </div>
         <div class="info-item info-date">

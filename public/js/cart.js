@@ -1,6 +1,6 @@
 const catalogArea = $('#catalog');
 const cartTotalPrice = $('.total-price');
-const addCartBtn = $('#add-cart');
+const addCartBtn = $('#add-to-cart');
 const cartBlock = $('.cart-block');
 const cartCount = $('.count-cart');
 const totalCountPage = $('#total-page-count');
