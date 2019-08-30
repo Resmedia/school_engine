@@ -101,7 +101,7 @@ function getTotalPrice()
         if (isset($items)) {
             foreach ($items as $item) {
                 $bdItem = (object)getBdItem($item['id'], 'catalog')[0];
-                $price += $bdItem->price;
+                $price += $bdItem->price * $item['count'];
             }
         }
     }
