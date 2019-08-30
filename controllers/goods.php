@@ -5,57 +5,70 @@
  * Date: 29.08.19
  * Time: 18:09
  */
+//unset($_SESSION["cart"]);
 
-if (!isset($_COOKIE["cart"])) {
-    setcookie("cart", json_encode([]), time() + 3600);
-    if(isset($_COOKIE['cart'])){
-        return $_COOKIE['cart'];
-    }
+if (!isset($_SESSION["cart"])) {
+    $_SESSION["cart"] = [];
 }
 
-function addToCart($id)
+function addToCart(int $id)
 {
     if ($id) {
+        $id = intval($id);
         $item = (object)getBdItem($id, 'catalog')[0];
 
         if ($item) {
-            $images = (object)getImages($item->id, 'catalog')[0];
-
+            $itemId = intval($item->id);
             $newItem = [
-                'id' => $item->id,
+                'id' => $itemId,
                 'count' => 1,
-                'image' => $images->url,
-                'name' => $item->name,
-                'price' => $item->price,
             ];
 
-            if(isset($_COOKIE['cart'])){
-                $cartItems = json_decode($_COOKIE['cart'], true);
-                $newCart = [];
-
-                if(isset($cartItems)){
-                    foreach ($cartItems as $cartItem){
-                        if($cartItem['id'] == $item->id){
-                            $cartItem['count']++;
-                            array_push($newCart, $cartItem);
-                        } else {
-                            $updateItem = [
-                                'id' => $cartItem['id'],
-                                'count' => $cartItem['count'],
-                                'image' => $cartItem['image'],
-                                'name' => $cartItem['name'],
-                                'price' => $cartItem['price'],
-                            ];
-                            array_push($newCart, $updateItem);
+            if (isset($_SESSION['cart'])) {
+                if (count($_SESSION['cart'])) {
+                    foreach ($_SESSION['cart'] as $key => $cartItem) {
+                        if ($cartItem['id'] == $itemId) {
+                            $_SESSION['cart'][$key]['count']++;
+                            return $_SESSION['cart'];
                         }
-                        setcookie("cart", json_encode($newCart), time() + 3600);
-                        return $newCart;
-                    }
+                    };
+
+                    array_push($_SESSION['cart'], $newItem);
+                    return $_SESSION['cart'];
+
                 } else {
-                    array_push($newCart, $newItem);
-                    setcookie("cart", json_encode($newCart), time() + 3600);
-                    return $newCart;
+                    array_push($_SESSION['cart'], $newItem);
+                    return $_SESSION['cart'];
                 }
+
+            } else {
+                $_SESSION["cart"] = [];
+                array_push($_SESSION['cart'], $newItem);
+                return $_SESSION['cart'];
+            }
+        }
+    }
+
+    return false;
+}
+
+function removeFromCart(int $id)
+{
+    if ($id) {
+        $id = intval($id);
+        if (isset($_SESSION['cart'])) {
+            if (count($_SESSION['cart'])) {
+                foreach ($_SESSION['cart'] as $key => $cartItem) {
+                    if ($cartItem['id'] == $id) {
+                        if ($cartItem['count'] > 1) {
+                            --$_SESSION['cart'][$key]['count'];
+                        } else {
+                            unset($_SESSION['cart'][$key]);
+                        }
+                    }
+                }
+
+                return getUserCartItems();
             }
         }
     }
@@ -67,9 +80,9 @@ function getCartCount()
 {
     $count = 0;
 
-    if (isset($_COOKIE["cart"])) {
-        $items = json_decode($_COOKIE["cart"], true);
-        if(isset($items)){
+    if (isset($_SESSION["cart"])) {
+        $items = $_SESSION["cart"];
+        if (isset($items)) {
             foreach ($items as $item) {
                 $count += $item['count'];
             }
@@ -83,11 +96,12 @@ function getTotalPrice()
 {
     $price = 0;
 
-    if (isset($_COOKIE["cart"])) {
-        $items = json_decode($_COOKIE["cart"], true);
-        if(isset($items)) {
+    if (isset($_SESSION["cart"])) {
+        $items = $_SESSION["cart"];
+        if (isset($items)) {
             foreach ($items as $item) {
-                $price += $item['price'];
+                $bdItem = (object)getBdItem($item['id'], 'catalog')[0];
+                $price += $bdItem->price;
             }
         }
     }
@@ -96,15 +110,27 @@ function getTotalPrice()
 
 function clearCart()
 {
-    setcookie("cart");
+    unset($_SESSION["cart"]);
     return true;
 }
 
 function getUserCartItems()
 {
-    $items = [];
-    if (isset($_COOKIE["cart"])) {
-        $items = json_decode($_COOKIE["cart"], true);
+    $bdItems = [];
+    if (isset($_SESSION["cart"])) {
+        $items = $_SESSION["cart"];
+        foreach ($items as $item) {
+            $bdItem = (object)getBdItem($item['id'], 'catalog')[0];
+            $bdImage = (object)getImages($bdItem->id, 'catalog')[0];
+            $newItem = [
+                'id' => $bdItem->id,
+                'image' => $bdImage->url,
+                'count' => $item['count'],
+                'price' => $bdItem->price,
+                'name' => $bdItem->name,
+            ];
+            array_push($bdItems, $newItem);
+        }
     }
-    return $items;
+    return $bdItems;
 }

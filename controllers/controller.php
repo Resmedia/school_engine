@@ -116,6 +116,12 @@ function prepareVariables($url, $id, $post)
             exit();
             break;
 
+        case "/api/remove-from-cart":
+            $result = removeFromCart((int)$post['id']);
+            echo json_encode($result);
+            exit();
+            break;
+
 
         case "/api/message":
             $result = actionMessage(
