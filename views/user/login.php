@@ -19,7 +19,7 @@
             <form class="registration" method="post">
                 <input class="form-control" type="email" name="email" autocomplete="off" placeholder="Ваш E-mail">
                 <input class="form-control" type="password" name="pass" autocomplete="off" placeholder="Ваш Пароль">
-                <input type="submit" class="btn btn-success" name="send">
+                <button type="submit" class="btn btn-success">Отправить</button>
             </form>
             <a href="/registration" class="text-center registration-link text-default">
                 Регистрация на сайте

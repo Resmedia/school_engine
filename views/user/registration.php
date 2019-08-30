@@ -20,7 +20,7 @@
                 <input class="form-control" type="text" name="name" autocomplete="off" placeholder="Ваше ФИО">
                 <input class="form-control" type="email" name="email" autocomplete="off" placeholder="Ваш E-mail">
                 <input class="form-control" type="password" name="pass" autocomplete="off" placeholder="Ваш Пароль">
-                <input type="submit" class="btn btn-success" name="send">
+                <button type="submit" class="btn btn-success">Отправить</button>
             </form>
             <a href="/login" class="text-center registration-link text-default">
                 Войти на сайт
