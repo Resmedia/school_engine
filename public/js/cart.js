@@ -1,10 +1,35 @@
 const catalogArea = $('#catalog');
 const cartTotalPrice = $('.total-price');
+const addCartBtn = $('#add-cart');
 const cartBlock = $('.cart-block');
 const cartCount = $('.count-cart');
 const totalCountPage = $('#total-page-count');
 const totalPricePage = $('#total-page-price');
 
+// TODO refactoring double code
+addCartBtn.on('click', data => {
+    const id = data.target.dataset.id;
+    $.ajax({
+        method: 'post',
+        url: '/api/add-to-cart',
+        data: {
+            id: +id,
+        },
+        beforeSend: () => {
+            $('#loader').show();
+        },
+        complete: () => {
+            $('#loader').hide();
+        },
+    }).done(data => {
+        let element = JSON.parse(data);
+        let count = 0;
+        $.each(element, (key, value) => {
+            count += value.count;
+        });
+        cartCount.html(count);
+    })
+});
 
 catalogArea.click(data => {
     if(data.target.id = 'add-cart'){

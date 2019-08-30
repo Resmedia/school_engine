@@ -51,6 +51,9 @@ $feedback->messages = $messages;
         <div class="info-item info-desc">
             <?= $item->full_desc ?>
         </div>
+        <div id="add-cart" class="btn btn-success pull-left" data-id="<?= $item->id ?>">
+            Добавить в карзину
+        </div>
         <div class="info-item info-date">
             <?= date('d.m.Y в H:i', $item->time_create) ?>
         </div>
