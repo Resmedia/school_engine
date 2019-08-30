@@ -8,17 +8,21 @@ $model = 'catalog';
     <?= $name ?: '' ?>
 </h1>
 
-<div class="catalog">
+<div id="catalog" class="catalog">
     <?php foreach ($catalog as $item):
         $object = (object)$item;
         $images = getImages($object->id, $model);
         ?>
-        <a class="catalog-item" href="/catalog/<?= $object->id ?>">
-            <img class="item-img" alt="img" src="<?= IMAGES_DIR . 'small/' . $images[0]['url'] ?>">
+        <div class="catalog-item">
+            <a href="/catalog/<?= $object->id ?>">
+                <img class="item-img" alt="img" src="<?= IMAGES_DIR . 'small/' . $images[0]['url'] ?>">
+            </a>
             <div class="item-info">
-                <h2 class="info-name">
-                    <?= $object->name ?>
-                </h2>
+                <a href="/catalog/<?= $object->id ?>">
+                    <h2 class="info-name">
+                        <?= $object->name ?>
+                    </h2>
+                </a>
                 <div class="bottom-price">
                     Стоимость <?= $object->price ?> руб.
                 </div>
@@ -36,8 +40,11 @@ $model = 'catalog';
                     <div class="bottom-date pull-right">
                         <?= date('d.m.Y в h:i', $object->time_create) ?>
                     </div>
+                    <div id="add-cart" class="btn btn-success" data-id="<?= $object->id ?>">
+                        Добавить в карзину
+                    </div>
                 </div>
             </div>
-        </a>
+        </div>
     <?php endforeach; ?>
 </div>

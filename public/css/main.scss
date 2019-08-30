@@ -78,7 +78,11 @@ textarea{
 }
 .header {
   padding: 3px;
-  @include shadow(0 0 2px rgba(191, 191, 191, 0.77))
+  @include shadow(0 0 2px rgba(191, 191, 191, 0.77));
+  .fa-shopping-cart {
+    font-size: 35px;
+    margin-top: -10px;
+  }
 }
 .pull-right{
   float: right;
@@ -164,6 +168,28 @@ textarea{
       color: $white;
       padding: 30px;
       cursor: pointer;
+      position: relative;
+      .count-cart{
+        position: absolute;
+        font-size: 75%;
+        background: $gray;
+        color: $white;
+        line-height: 1;
+        padding: 1px 2px;
+        border-radius: 5px;
+        margin-top: -10px;
+        margin-left: -10px;
+      }
+      .price-area{
+        position: absolute;
+        color: $gray;
+        bottom: 6px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 70%;
+      }
       &:hover {
         color: $link;
       }
@@ -405,6 +431,19 @@ textarea{
         font-size: 80%;
         margin-top: 20px;
       }
+    }
+  }
+}
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .item-info {
+    display: flex;
+    align-items: center;
+    .item-img {
+      width: 100px;
+      margin-right: 20px;
     }
   }
 }

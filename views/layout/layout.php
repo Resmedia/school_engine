@@ -29,6 +29,7 @@
     </div>
     <?= renderTemplate('footer') ?>
 </div>
+<script src="/js/cart.js"></script>
 <script src="/js/main.js"></script>
 </body>
 </html>

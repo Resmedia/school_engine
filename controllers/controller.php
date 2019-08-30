@@ -6,7 +6,9 @@ function prepareVariables($url, $id, $post)
 {
     switch ($url) {
         case '/':
-            $params = [];
+            $params = [
+                'page' => 'page/main',
+            ];
             break;
 
         case '/gallery':
@@ -81,6 +83,13 @@ function prepareVariables($url, $id, $post)
             }
             break;
 
+        case '/cart':
+            $params = [
+                'page' => 'cart/index',
+                'items' => getUserCartItems(),
+            ];
+            break;
+
         case "/contacts":
             if (getBdItem('contacts', 'pages')) {
                 $params = [
@@ -94,6 +103,19 @@ function prepareVariables($url, $id, $post)
                 ];
             }
             break;
+
+        case "/api/add-to-cart":
+            $result = addToCart((int)$post['id']);
+            echo json_encode($result);
+            exit();
+            break;
+
+        case "/api/clear-cart":
+            $result = clearCart();
+            echo json_encode($result);
+            exit();
+            break;
+
 
         case "/api/message":
             $result = actionMessage(
