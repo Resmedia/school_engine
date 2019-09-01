@@ -50,7 +50,7 @@ function login(string $email, string $password)
 
         $result = getAssocResult("SELECT * FROM `users` WHERE `email` = '$email'");
 
-        if ($result[0]) {
+        if ($result) {
             if (password_verify($password, $result[0]['password_hash'])) {
                 $hash = setDefaultHash(11, $email);
                 setcookie("hash", $hash, time() + 3600);
