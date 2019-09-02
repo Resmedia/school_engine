@@ -6,7 +6,7 @@ $result = '<nav class="top-nav content">';
 $result .= '<ul class="nav">';
 $result .= renderMenu(getBdItems('menu', 'position', 'ASC'));
 $result .= '<li class="nav__item">';
-$result .= !getAuthUser() ? '<a class="nav__link" href="/login">Вход</a>' : '<a class="nav__link" href="/logout">Выход (' . getAuthUser()['name'] .')</a>';
+$result .= !getAuthUser() ? '<a class="nav__link" href="/login">Вход</a>' : '<a class="nav__link" href="/cabinet/catalog">Кабинет - ' . getAuthUser()['name'] . '</a>';
 $result .= '</li>';
 $result .= '<li class="nav__item">';
 $result .= '<a class="nav__link" href="/cart">

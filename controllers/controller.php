@@ -147,6 +147,130 @@ function prepareVariables($url, $id, $post)
             exit();
             break;
 
+        case "/cabinet/catalog":
+            if (getAuthUser()) {
+                $params = [
+                    'page' => 'admin/catalog/index',
+                    'items' => getBdItems('catalog')
+                ];
+            } else {
+                $params = [
+                    'page' => 'page/error',
+                    'code' => 403,
+                ];
+            }
+            break;
+
+        case "/cabinet/catalog/update":
+            if (getAuthUser()) {
+                $params = [
+                    'page' => 'admin/catalog/update',
+                ];
+            } else {
+                $params = [
+                    'page' => 'page/error',
+                    'code' => 403,
+                ];
+            }
+            break;
+
+        case "/api/catalog/update":
+            if (getAuthUser()) {
+                actionCatalog('update', $post);
+                exit();
+                break;
+            } else {
+                $params = [
+                    'page' => 'page/error',
+                    'code' => 403,
+                ];
+            }
+            break;
+
+        case "/api/catalog/create":
+            if (getAuthUser()) {
+                actionCatalog('create', $post);
+                exit();
+                break;
+            } else {
+                $params = [
+                    'page' => 'page/error',
+                    'code' => 403,
+                ];
+            }
+            break;
+
+        case "/api/catalog/remove/$id":
+            if (getAuthUser()) {
+                actionCatalog('remove', null, $id);
+                exit();
+                break;
+            } else {
+                $params = [
+                    'page' => 'page/error',
+                    'code' => 403,
+                ];
+            }
+            break;
+
+        case "/cabinet/catalog/update/$id":
+            if (getAuthUser()) {
+                $params = [
+                    'page' => 'admin/catalog/update',
+                    'item' => getItemContent(+$id, 'catalog'),
+                ];
+            } else {
+                $params = [
+                    'page' => 'page/error',
+                    'code' => 403,
+                ];
+            }
+            break;
+
+        case "/cabinet/users":
+            if (getAuthUser()) {
+                $params = [
+                    'page' => 'admin/users/index',
+                    'users' => getBdItems('users')
+                ];
+            } else {
+                $params = [
+                    'page' => 'page/error',
+                    'code' => 403,
+                ];
+            }
+            break;
+
+        case "/cabinet/gallery":
+            if (getAuthUser()) {
+                $params = [
+                    'page' => 'admin/gallery/index',
+                    'images' => getBdItems('images'),
+                    'gallery' => getBdItems('gallery_images'),
+                ];
+            } else {
+                $params = [
+                    'page' => 'page/error',
+                    'code' => 403,
+                ];
+            }
+            break;
+
+        case "/cabinet/feedback":
+            if (getAuthUser()) {
+                $params = [
+                    'page' => 'admin/feedback/index',
+                    'images' => getBdItems('images'),
+                    'gallery' => getBdItems('gallery_images'),
+                ];
+            } else {
+                $params = [
+                    'page' => 'page/error',
+                    'code' => 403,
+                ];
+            }
+            break;
+
         default:
             $params = [
                 'page' => 'page/error',

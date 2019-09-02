@@ -3,6 +3,7 @@ $gray: #6e6e6e;
 $main: #142133;
 $link: #ff512e;
 $success: #2b963d;
+$error: #9c040f;
 
 $shadow: none;
 @mixin shadow($shadow) {
@@ -95,6 +96,11 @@ textarea{
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
+  &.btn-sm{
+    font-size: 16px;
+    padding: 8px 12px;
+    max-height: 34px;
+  }
   &.btn-xs{
     font-size: 12px;
     padding: 3px 9px;
@@ -106,6 +112,14 @@ textarea{
     color: $white;
     &:hover{
       background: lighten($success, 5);
+    }
+  }
+  &.btn-danger {
+    background: $error;
+    border: 1px solid darken($error, 5);
+    color: $white;
+    &:hover{
+      background: lighten($error, 5);
     }
   }
   &.btn-default{
@@ -130,6 +144,7 @@ textarea{
 
 .container {
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -170,6 +185,7 @@ textarea{
       cursor: pointer;
       .fa{
         position: relative;
+        display: inline-flex;
         color: $gray;
         .count-cart{
           position: absolute;
@@ -462,6 +478,58 @@ textarea{
       width: 150px;
       margin-right: 20px;
     }
+  }
+}
+.admin-content {
+  width: 100%;
+  margin-right: 30px;
+}
+.cabinet {
+  display: flex;
+  ul.sidebar-menu {
+    padding: 15px 40px 0 0;
+    list-style: none;
+    min-height: 76vh;
+    min-width: 200px;
+    border-right: 1px solid rgba(153, 153, 153, 0.4);
+    margin: 0 15px 0 25px;
+    .sidebar-link {
+      text-decoration: none;
+      display: block;
+      padding: 10px 0;
+      color: $main;
+      .fa {
+        min-width: 38px;
+      }
+      &:hover{
+        color: $link;
+      }
+    }
+  }
+  ul.edit-block {
+    display: block;
+    padding: 0;
+    width: 100%;
+    list-style: none;
+    li.edit-item {
+      display: grid;
+      grid-template-columns: 1fr 10fr 1fr;
+      align-items: center;
+      padding: 10px 25px;
+      @include transition(all .3s ease);
+      @include transform(scale(1));
+      &:hover {
+        @include shadow(0 0 10px rgba(0, 0, 0, 0.49));
+        @include transition(all .3s ease);
+        @include transform(scale(1.001));
+      }
+      .item-info {
+        width: 100%;
+      }
+    }
+  }
+  .update-block {
+    margin-top: 50px;
   }
 }
 .footer {

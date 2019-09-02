@@ -56,7 +56,7 @@ function login(string $email, string $password)
                 setcookie("hash", $hash, time() + 3600);
                 $_SESSION['email'] = $email;
                 $_SESSION['id'] = $result[0]['id'];
-                header("Location: /");
+                header("Location: /cabinet/catalog");
             }
             return 'Пользователь или пароль неверный!';
         }
@@ -107,7 +107,7 @@ function signUp(string $name, string $email, string $password)
                 setcookie("hash", $default_hash, time() + 3600);
                 $_SESSION['email'] = $email;
                 $_SESSION['id'] = $result[0]['id'];
-                header("Location: /");
+                header("Location: /cabinet/catalog");
                 return true;
             }
 

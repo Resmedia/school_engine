@@ -8,7 +8,11 @@
 
 function render($page, $param = [])
 {
-    return renderTemplate(LAYOUTS_DIR . "layout", ['content' => renderTemplate($page, $param)]);
+    if($page != 'cabinet'){
+        return renderTemplate(LAYOUTS_DIR . "layout", ['content' => renderTemplate($page, $param)]);
+    } else {
+        return renderTemplate(ADMIN_DIR . "index", ['content' => renderTemplate($page, $param)]);
+    }
 }
 
 function renderTemplate($page, array $params = [])

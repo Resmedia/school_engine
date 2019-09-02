@@ -18,6 +18,9 @@ for ($i = 0; $i < $count; $i++) {
     if ($count >= 3) {
         $page = $url_array[$count - 2];
         $id = $url_array[$count - 1];
+        if($page = 'update'){
+            $page = 'cabinet';
+        }
     }
     if ($count < 3) {
         $page = $url_array[1];
