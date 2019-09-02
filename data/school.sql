@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 30, 2019 at 12:14 PM
+-- Generation Time: Sep 02, 2019 at 01:19 PM
 -- Server version: 5.6.33
 -- PHP Version: 7.1.8
 
@@ -41,9 +41,10 @@ CREATE TABLE `catalog` (
 --
 
 INSERT INTO `catalog` (`id`, `name`, `full_desc`, `price`, `views`, `time_create`, `time_update`) VALUES
-(1, 'Стружка металлическая', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Proin eget tortor risus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.\r\n\r\nCurabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh. Pellentesque in ipsum id orci porta dapibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Nulla porttitor accumsan tincidunt.', 95, 513, 1566590768, 0),
-(2, 'Замок амбарный', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Proin eget tortor risus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.\r\n\r\nCurabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh. Pellentesque in ipsum id orci porta dapibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Nulla porttitor accumsan tincidunt.', 100, 105, 1566590769, 0),
-(3, 'Аквариум зеленый в полоску', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Proin eget tortor risus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.\r\n\r\nCurabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Sed porttitor lectus nibh. Pellentesque in ipsum id orci porta dapibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Nulla porttitor accumsan tincidunt.', 176, 44, 1566590769, 1566590769);
+(6, 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.', 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Vivamus suscipit tortor eget felis porttitor volutpat.\r\n\r\nProin eget tortor risus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.\r\n\r\nCras ultricies ligula sed magna dictum porta. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.\r\n\r\nCurabitur aliquet quam id dui posuere blandit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.', 200, 100, 1567419149, 1567419401),
+(7, 'Curabitur aliquet quam id dui posuere blandit. Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.\r\n\r\nVestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Proin eget tortor risus.\r\n\r\nPraesent sapien massa, convallis a pellentesque nec, egestas non nisi. Donec rutrum congue leo eget malesuada. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.\r\n\r\nVivamus suscipit tortor eget felis porttitor volutpat. Pellentesque in ipsum id orci porta dapibus. Nulla porttitor accumsan tincidunt.', 300, 122, 1567419390, 1567419390),
+(8, 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Proin eget tortor risus. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.\r\n\r\nNulla porttitor accumsan tincidunt. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vivamus suscipit tortor eget felis porttitor volutpat.\r\n\r\nMauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Pellentesque in ipsum id orci porta dapibus.\r\n\r\nCurabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Nulla porttitor accumsan tincidunt.', 130, 99, 1567419432, 1567419432),
+(9, 'Nulla quis lorem ut libero malesuada feugiat', 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Nulla quis lorem ut libero malesuada feugiat. Sed porttitor lectus nibh.\r\n\r\nVestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus suscipit tortor eget felis porttitor volutpat.\r\n\r\nVestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Nulla porttitor accumsan tincidunt.\r\n\r\nSed porttitor lectus nibh. Sed porttitor lectus nibh. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.', 189, 22, 1567419456, 1567419456);
 
 -- --------------------------------------------------------
 
@@ -101,15 +102,15 @@ CREATE TABLE `gallery_images` (
 --
 
 INSERT INTO `gallery_images` (`id`, `model_id`, `model`, `url`, `name`, `time_create`, `time_update`) VALUES
-(1, 1, 'catalog', '01.jpg', 'Альт рисунка 1', 1566669799, 1566669799),
-(2, 1, 'catalog', '02.jpg', 'Альт рисунка 2', 1566669799, 1566669799),
-(3, 1, 'catalog', '03.jpg', 'Альт рисунка 3', 1566669799, 1566669799),
-(4, 2, 'catalog', '04.jpg', 'Альт рисунка 4', 1566669799, 1566669799),
-(5, 2, 'catalog', '05.jpg', 'Альт рисунка 5', 1566669799, 1566669799),
-(6, 2, 'catalog', '06.jpg', 'Альт рисунка 6', 1566669799, 1566669799),
-(7, 3, 'catalog', '07.jpg', 'Альт рисунка 7', 1566669799, 1566669799),
-(8, 3, 'catalog', '08.jpg', 'Альт рисунка 8', 1566669799, 1566669799),
-(9, 3, 'catalog', '09.jpg', 'Альт рисунка 9', 1566669799, 1566669799);
+(1, 6, 'catalog', '01.jpg', 'Альт рисунка 1', 1566669799, 1566669799),
+(2, 6, 'catalog', '02.jpg', 'Альт рисунка 2', 1566669799, 1566669799),
+(3, 7, 'catalog', '03.jpg', 'Альт рисунка 3', 1566669799, 1566669799),
+(4, 7, 'catalog', '04.jpg', 'Альт рисунка 4', 1566669799, 1566669799),
+(5, 8, 'catalog', '05.jpg', 'Альт рисунка 5', 1566669799, 1566669799),
+(6, 8, 'catalog', '06.jpg', 'Альт рисунка 6', 1566669799, 1566669799),
+(7, 8, 'catalog', '07.jpg', 'Альт рисунка 7', 1566669799, 1566669799),
+(8, 6, 'catalog', '08.jpg', 'Альт рисунка 8', 1566669799, 1566669799),
+(9, 9, 'catalog', '09.jpg', 'Альт рисунка 9', 1566669799, 1566669799);
 
 -- --------------------------------------------------------
 
@@ -131,7 +132,7 @@ CREATE TABLE `images` (
 
 INSERT INTO `images` (`id`, `url`, `likes`, `views`, `time_create`) VALUES
 (1, '01.jpg', 322, 1059, 1566467742),
-(2, '02.jpg', 24, 17, 1566467742),
+(2, '02.jpg', 24, 18, 1566467742),
 (3, '03.jpg', 5, 25, 1566467742),
 (4, '04.jpg', 9, 2, 1566467742),
 (5, '05.jpg', 0, 0, 1566467742),
@@ -217,6 +218,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password_hash`, `default_hash`, `role`, `status`, `time_create`, `time_update`) VALUES
+(1, 'Женя', 'resmedia@ya.ru', '$2y$10$X6cSy/tReX8IHjtDnBRfEessnVQz2UDt8m2S.vBn7LIa559UZTJHO', 'fef1a75c89e11dd470ee47', 'user', 1, 1567341474, 1567419353);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -272,7 +280,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `catalog`
 --
 ALTER TABLE `catalog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `feedback`
 --
@@ -297,7 +305,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

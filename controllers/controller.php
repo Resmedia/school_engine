@@ -22,7 +22,7 @@ function prepareVariables($url, $id, $post)
             $params = [
                 'page' => 'user/login',
                 'result' => $post ? login($post['email'], $post['pass']) : '',
-                'user' => getAuthUser(),
+                'user' => getAdminUser(),
             ];
             break;
 
@@ -35,7 +35,7 @@ function prepareVariables($url, $id, $post)
             $params = [
                 'page' => 'user/registration',
                 'result' => $post ? signUp($post['name'], $post['email'], $post['pass']) : '',
-                'user' => getAuthUser(),
+                'user' => getAdminUser(),
             ];
             break;
 
@@ -148,7 +148,7 @@ function prepareVariables($url, $id, $post)
             break;
 
         case "/cabinet/catalog":
-            if (getAuthUser()) {
+            if (getAdminUser()) {
                 $params = [
                     'page' => 'admin/catalog/index',
                     'items' => getBdItems('catalog')
@@ -162,7 +162,7 @@ function prepareVariables($url, $id, $post)
             break;
 
         case "/cabinet/catalog/update":
-            if (getAuthUser()) {
+            if (getAdminUser()) {
                 $params = [
                     'page' => 'admin/catalog/update',
                 ];
@@ -175,7 +175,7 @@ function prepareVariables($url, $id, $post)
             break;
 
         case "/api/catalog/update":
-            if (getAuthUser()) {
+            if (getAdminUser()) {
                 actionCatalog('update', $post);
                 exit();
                 break;
@@ -188,7 +188,7 @@ function prepareVariables($url, $id, $post)
             break;
 
         case "/api/catalog/create":
-            if (getAuthUser()) {
+            if (getAdminUser()) {
                 actionCatalog('create', $post);
                 exit();
                 break;
@@ -201,7 +201,7 @@ function prepareVariables($url, $id, $post)
             break;
 
         case "/api/catalog/remove/$id":
-            if (getAuthUser()) {
+            if (getAdminUser()) {
                 actionCatalog('remove', null, $id);
                 exit();
                 break;
@@ -214,7 +214,7 @@ function prepareVariables($url, $id, $post)
             break;
 
         case "/cabinet/catalog/update/$id":
-            if (getAuthUser()) {
+            if (getAdminUser()) {
                 $params = [
                     'page' => 'admin/catalog/update',
                     'item' => getItemContent(+$id, 'catalog'),
@@ -228,7 +228,7 @@ function prepareVariables($url, $id, $post)
             break;
 
         case "/cabinet/users":
-            if (getAuthUser()) {
+            if (getAdminUser()) {
                 $params = [
                     'page' => 'admin/users/index',
                     'users' => getBdItems('users')
@@ -242,7 +242,7 @@ function prepareVariables($url, $id, $post)
             break;
 
         case "/cabinet/gallery":
-            if (getAuthUser()) {
+            if (getAdminUser()) {
                 $params = [
                     'page' => 'admin/gallery/index',
                     'images' => getBdItems('images'),
@@ -257,7 +257,7 @@ function prepareVariables($url, $id, $post)
             break;
 
         case "/cabinet/feedback":
-            if (getAuthUser()) {
+            if (getAdminUser()) {
                 $params = [
                     'page' => 'admin/feedback/index',
                     'images' => getBdItems('images'),

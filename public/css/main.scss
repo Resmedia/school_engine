@@ -486,6 +486,7 @@ textarea{
 }
 .cabinet {
   display: flex;
+  min-height: 77vh;
   ul.sidebar-menu {
     padding: 15px 40px 0 0;
     list-style: none;

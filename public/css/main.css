@@ -437,7 +437,8 @@ textarea {
   margin-right: 30px; }
 
 .cabinet {
-  display: flex; }
+  display: flex;
+  min-height: 77vh; }
   .cabinet ul.sidebar-menu {
     padding: 15px 40px 0 0;
     list-style: none;

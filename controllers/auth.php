@@ -16,6 +16,19 @@ function getAuthUser()
     return false;
 }
 
+function getAdminUser()
+{
+    if (isset($_COOKIE["hash"])) {
+
+        $hash = $_COOKIE["hash"];
+        $user = getUserByHash($hash);
+        if ($_SESSION['email'] == $user[0]['email'] && $user[0]['role'] == 'admin') {
+            return $user[0];
+        }
+    }
+    return false;
+}
+
 function getUserByHash(string $hash)
 {
     if (!$hash) {

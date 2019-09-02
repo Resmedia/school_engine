@@ -36,7 +36,7 @@ $sidebarMenu = 'sidebarMenu.php';
         <?= renderTemplate('header') ?>
         <section class="content">
             <div class="cabinet">
-                <?= getAuthUser() ? renderTemplate('admin/sidebarMenu') : null ?>
+                <?= getAdminUser() ? renderTemplate('admin/sidebarMenu') : null ?>
                 <div class="admin-content">
                     <?= $content ?>
                 </div>
