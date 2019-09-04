@@ -176,7 +176,7 @@ function prepareVariables($url, $id, $post)
 
         case "/api/catalog/update":
             if (getAdminUser()) {
-                actionCatalog('update', $post);
+                actionItems('update', 'catalog', $post);
                 exit();
                 break;
             } else {
@@ -189,7 +189,7 @@ function prepareVariables($url, $id, $post)
 
         case "/api/catalog/create":
             if (getAdminUser()) {
-                actionCatalog('create', $post);
+                actionItems('create', 'catalog', $post);
                 exit();
                 break;
             } else {
@@ -202,7 +202,7 @@ function prepareVariables($url, $id, $post)
 
         case "/api/catalog/remove/$id":
             if (getAdminUser()) {
-                actionCatalog('remove', null, $id);
+                actionItems('remove', 'catalog', null, $id);
                 exit();
                 break;
             } else {

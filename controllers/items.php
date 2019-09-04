@@ -52,38 +52,41 @@ function getItemContent(int $id, string $element): array
     return $result;
 }
 
-function actionCatalog(
+function actionItems(
     string $action,
+    string $column,
     $post = null,
     $id = 0
 )
 {
-    $time_create = time();
-    $time_update = time();
-    if(isset($post)) {
-        $views = $post['views'];
-        $fullDesc = $post['full_desc'];
-        $name = $post['name'];
-        $price = $post['price'];
+    if($post && ($action == 'create' || $action = 'update')){
+        $columns = [];
+        $values = [];
+        $update = [];
         $postId = $post['id'];
+        $time_create = time();
+        $time_update = time();
+
+        foreach ($post as $key => $value){
+            $columns[] = '`' . $key . '`';
+            $values[] = '\'' . $value . '\'';
+            $update[] = "`$key` = '$value'";
+        }
+
+        $strColumns = implode(', ', $columns);
+        $strValues = implode(', ', $values);
+        $strUpdate = implode(', ' , $update);
     }
 
     switch ($action) {
         case 'create':
-            $result = updateSql("
-               INSERT INTO `catalog` (`name`, `full_desc`, `price`, `views`, `time_create`, `time_update`) 
-               VALUES ('$name','$fullDesc','$price','$views','$time_create', '$time_update')
-            ");
+            $result = updateSql("INSERT INTO $column ($strColumns, `time_create`, `time_update`) VALUES ($strValues, $time_create, $time_update)");
             break;
         case 'update':
-            $result = updateSql("
-               UPDATE `catalog` 
-               SET `name` = '$name', `full_desc` = '$fullDesc', `price` = '$price', `views` = '$views', `time_create` = `time_create`, `time_update` = '$time_update' 
-               WHERE `id` = '$postId'
-            ");
+            $result = updateSql("UPDATE $column SET $strUpdate, `time_update` = $time_update  WHERE `id` = '$postId'");
             break;
         case 'remove':
-            $result = updateSql("DELETE FROM `catalog` WHERE `id` = '$id'");
+            $result = updateSql("DELETE FROM $column WHERE `id` = '$id'");
             break;
         default:
             $result = false;
@@ -91,7 +94,7 @@ function actionCatalog(
 
     if($result){
         header("Location: /cabinet/catalog");
-    } else {
-        return $result;
     }
+
+    return $result;
 }
