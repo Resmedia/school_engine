@@ -33,7 +33,9 @@ $sidebarMenu = 'sidebarMenu.php';
 </head>
 <body>
     <div class="top">
-        <?= renderTemplate('header') ?>
+        <div class="container">
+            <?= renderTemplate('header') ?>
+        </div>
         <section class="content">
             <div class="cabinet">
                 <?= getAdminUser() ? renderTemplate('admin/sidebarMenu') : null ?>
@@ -43,7 +45,9 @@ $sidebarMenu = 'sidebarMenu.php';
             </div>
         </section>
     </div>
-    <?= renderTemplate('footer') ?>
+    <div class="container">
+        <?= renderTemplate('footer') ?>
+    </div>
 <script src="/js/cart.js"></script>
 <script src="/js/main.js"></script>
 </body>

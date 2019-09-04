@@ -120,6 +120,7 @@ textarea {
     display: none;
     position: absolute;
     background: #FFFFFF;
+    z-index: 1;
     margin-top: 20px;
     list-style: none;
     min-width: 150px;
