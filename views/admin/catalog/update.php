@@ -17,7 +17,9 @@ if($issetRecord){
     <form method="post" action="/api/catalog/<?= $issetRecord ? 'update' : 'create'?>">
         <input class="form-control" name="id" hidden value="<?= $issetRecord ? $item->id : ''?>">
         <input class="form-control" name="name" value="<?= $issetRecord ? $item->name : ''?>" placeholder="Введите название">
-        <textarea class="form-control" rows="10" name="full_desc" placeholder="Введите текст"><?= $issetRecord ? $item->full_desc : ''?></textarea>
+        <textarea class="form-control" rows="10" name="full_desc" placeholder="Введите текст">
+            <?= $issetRecord ? $item->full_desc : ''?>
+        </textarea>
         <input class="form-control" name="price" value="<?= $issetRecord ? $item->price : ''?>" placeholder="Введите стоимость">
         <input class="form-control" name="views" value="<?= $issetRecord ? $item->views : ''?>" placeholder="Введите просмотры">
         <button type="submit" class="btn btn-success"><?= $issetRecord ? 'Обновить' : 'Создать' ?></button>
