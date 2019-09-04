@@ -54,11 +54,11 @@ function login(string $email, string $password)
 
     if($email && $password) {
         if(!isValidEmail($email)) {
-            return 'Email набран с ошибками!';
+            return ERRORS['email_error'];
         }
 
         if(isValidPassword($password)){
-            return 'Пароль имеет недопустимые знаки!';
+            return ERRORS['password_error'];
         }
 
         $result = getAssocResult("SELECT * FROM `users` WHERE `email` = '$email'");
@@ -71,11 +71,11 @@ function login(string $email, string $password)
                 $_SESSION['id'] = $result[0]['id'];
                 header("Location: /cabinet/catalog");
             }
-            return 'Пользователь или пароль неверный!';
+            return ERRORS['password_user_error'];
         }
-        return 'Пользователь или пароль неверный!';
+        return ERRORS['password_user_error'];
     }
-    return 'Все поля обязательны!';
+    return ERRORS['fields_empty'];
 }
 
 function setDefaultHash(int $count, string $email = '')
@@ -96,11 +96,11 @@ function signUp(string $name, string $email, string $password)
     if($name && $email && $password){
 
         if(!isValidEmail($email)) {
-            return 'Email набран с ошибками!';
+            return ERRORS['email_error'];
         }
 
         if(isValidPassword($password)){
-            return 'Пароль имеет недопустимые знаки!';
+            return ERRORS['password_error'];
         }
 
         if(!existUser($email)){
@@ -124,13 +124,13 @@ function signUp(string $name, string $email, string $password)
                 return true;
             }
 
-            return 'Что-то пошло не так!';
+            return ERRORS['something_wrong'];
 
         }
-        return 'Такой пользователь существует!';
+        return ERRORS['user_exist'];
     }
 
-    return 'Все поля обязательны к заполнению!';
+    return ERRORS['fields_empty'];
 }
 
 function generatePassHash(string $password): string
