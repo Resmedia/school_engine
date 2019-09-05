@@ -52,12 +52,7 @@ function getItemContent(int $id, string $element): array
     return $result;
 }
 
-function actionItems(
-    string $action,
-    string $column,
-    $post = null,
-    $id = 0
-)
+function actionItems(string $action, string $column, $post = null, $id = 0)
 {
     if($post && ($action == 'create' || $action = 'update')){
         $columns = [];
@@ -72,7 +67,6 @@ function actionItems(
             $values[] = '\'' . $value . '\'';
             $update[] = "`$key` = '$value'";
         }
-
         $strColumns = implode(', ', $columns);
         $strValues = implode(', ', $values);
         $strUpdate = implode(', ' , $update);
@@ -80,7 +74,10 @@ function actionItems(
 
     switch ($action) {
         case 'create':
-            $result = updateSql("INSERT INTO $column ($strColumns, `time_create`, `time_update`) VALUES ($strValues, $time_create, $time_update)");
+            $result = updateSql("
+                                      INSERT INTO $column ($strColumns, `time_create`, `time_update`) 
+                                      VALUES ($strValues, $time_create, $time_update)
+                                ");
             break;
         case 'update':
             $result = updateSql("UPDATE $column SET $strUpdate, `time_update` = $time_update  WHERE `id` = '$postId'");
@@ -93,7 +90,7 @@ function actionItems(
     }
 
     if($result){
-        header("Location: /cabinet/catalog");
+        header("Location: " . $_SERVER["HTTP_REFERER"]);
     }
 
     return $result;

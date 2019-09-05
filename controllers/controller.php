@@ -59,7 +59,7 @@ function prepareVariables($url, $id, $post)
 
         case '/catalog':
             $params = [
-                'page' => 'catalog/index',
+                'page' => '/catalog/index',
                 'catalog' => getBdItems('catalog', 'id', 'ASC'),
                 'name' => "Каталог товаров"
             ];
@@ -68,7 +68,7 @@ function prepareVariables($url, $id, $post)
         case "/catalog/$id":
             if (getBdItem($id, 'catalog')) {
                 $params = [
-                    'page' => 'catalog/view',
+                    'page' => '/catalog/view',
                     'messages' => [
                         'message' => '',
                         'items' => getFeedBackMessages(+$id, 'catalog')
