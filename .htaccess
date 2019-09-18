@@ -1,0 +1,10 @@
+RewriteCond %{REQUEST_URI} ^.*$
+RewriteRule ^(.*)$ /public/$1
+
+<IfModule mod_headers.c>
+	Header append Cache-Control "no-store, no-cache, must-revalidate"$fileName
+</IfModule>
+
+<IfModule mod_expires.c>
+	ExpiresActive On ExpiresDefault "now"
+</IfModule>
