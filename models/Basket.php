@@ -29,7 +29,18 @@ class Basket extends Model
         return $product->findAll(['id' => $this->product_id]);
     }
 
-    public function getSession()
+    // TODO move it to controllers
+    public function setToCart()
+    {
+
+    }
+
+    public function getCart()
+    {
+
+    }
+
+    public function removeFromCart()
     {
 
     }
