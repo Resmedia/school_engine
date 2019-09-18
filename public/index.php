@@ -63,7 +63,7 @@ print_r('FULL_DESC = ' . $item->full_desc . '<br/><br/>');
 print_r('PRICE = ' . $item->price . '<br/><br/>');
 print_r('VIEWS = ' . $item->views . '<br/>');
 echo '<br/>';
-echo 'Категории: ';
+echo 'Категории этого объекта: ';
 foreach ($product->getItemCategories($item->id) as $category) {
     echo $category['name'] . ', ';
 }
