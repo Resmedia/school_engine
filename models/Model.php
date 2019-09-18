@@ -33,13 +33,16 @@ abstract class Model implements IModel
             $this->insert($attributes);
         } else {
             $items = (array)$this->getOne($attributes['id']);
-            foreach ($items as $itemKey => $item) {
-                if($itemKey != 'queryString' && $attributes[$itemKey] != $item) {
-                    $dirtyAttributes[$itemKey] = $attributes[$itemKey];
-                }
-            }
 
-            $this->update($attributes['id'], $dirtyAttributes);
+            if($items && $attributes) {
+                foreach ($items as $itemKey => $item) {
+                    if($itemKey != 'queryString' && $attributes[$itemKey] != $item) {
+                        $dirtyAttributes[$itemKey] = $attributes[$itemKey];
+                    }
+                }
+
+                $this->update($attributes['id'], $dirtyAttributes);
+            }
         }
     }
 

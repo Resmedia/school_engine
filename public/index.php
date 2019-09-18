@@ -7,9 +7,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/../engine/Autoload.php";
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
-// TODO to test add refresh this page
-// TODO to test update uncomment 15, 29
-// TODO to test delete uncomment 38-42 and comment 29-36
+// TODO to test add item refresh this page
+// TODO to test update item uncomment 15, 29
+// TODO to test delete item uncomment 38-42 and comment 29-36
 
 $attributes = [
     //'id' => 30,
