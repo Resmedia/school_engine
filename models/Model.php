@@ -20,17 +20,26 @@ abstract class Model implements IModel
         $this->db = Db::getInstance();
     }
 
+    /**
+     * @name save
+     * @description Save new item or update dirty attributes in exist item
+    */
     public function save()
     {
         $attributes = (array)$this;
+        $dirtyAttributes = [];
 
         if (!isset($attributes['id'])) {
             $this->insert($attributes);
         } else {
-            $model = $this->getOne($attributes['id']);
-            if (isset($model)) {
-                $this->update($attributes['id'], $attributes);
+            $items = (array)$this->getOne($attributes['id']);
+            foreach ($items as $itemKey => $item) {
+                if($itemKey != 'queryString' && $attributes[$itemKey] != $item) {
+                    $dirtyAttributes[$itemKey] = $attributes[$itemKey];
+                }
             }
+
+            $this->update($attributes['id'], $dirtyAttributes);
         }
     }
 

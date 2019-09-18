@@ -13,13 +13,13 @@ spl_autoload_register([new Autoload(), 'loadClass']);
 
 $attributes = [
     //'id' => 30,
-    'name' => 'UPDATED - Donec sollicitudin molestie malesuada!',
-    'full_desc' => 'UPDATED - Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. 
+    'name' => 'Donec sollicitudin molestie malesuada!',
+    'full_desc' => 'Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. 
             Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec 
             velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit 
             amet nisl tempus convallis quis ac lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Nulla porttitor accumsan tincidunt.',
-    'price' => 3000,
+    'price' => 3004,
     'views' => 12,
     'time_create' => time(),
     'time_update' => time(),
