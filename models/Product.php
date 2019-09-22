@@ -14,6 +14,8 @@ namespace app\models;
 
 class Product extends Model
 {
+    const STATUS_PUBLISHED = 1;
+
     public $id;
     public $name;
     public $full_desc;
@@ -22,7 +24,7 @@ class Product extends Model
     public $time_create;
     public $time_update;
 
-    public function getTableName()
+    public static function getTableName()
     {
         return 'product';
     }

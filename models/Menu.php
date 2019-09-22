@@ -11,7 +11,9 @@ namespace app\models;
 
 class Menu extends Model
 {
-    public function getTableName() {
+    const STATUS_PUBLISHED = 1;
+
+    public static function getTableName() {
         return 'menu';
     }
 }

@@ -28,7 +28,7 @@ class User extends Model
     public $time_create;
     public $time_update;
 
-    public function getTableName()
+    public static function getTableName()
     {
         return 'users';
     }

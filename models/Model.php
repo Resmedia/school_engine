@@ -10,21 +10,11 @@ use app\engine\Db;
  */
 abstract class Model implements IModel
 {
-    /** @var $db Db */
-
-    protected $db;
-    public $errors;
-
-    public function __construct()
-    {
-        $this->db = Db::getInstance();
-    }
-
     /**
      * @name save
      * @description Save new item or update dirty attributes in exist item
     */
-    public function save()
+    /*public function save()
     {
         $attributes = (array)$this;
         $dirtyAttributes = [];
@@ -44,6 +34,23 @@ abstract class Model implements IModel
                 $this->update($attributes['id'], $dirtyAttributes);
             }
         }
+    }*/
+
+    public function getLimit($from, $to) {
+
+    }
+
+    public function getWere($name, $value) {
+
+    }
+
+    public function save() {
+        if (is_null($this->id)) {
+            $this->insert();
+        } else {
+            $this->update();
+        }
+
     }
 
     public function remove()
@@ -54,13 +61,36 @@ abstract class Model implements IModel
         }
     }
 
-    public function insert(array $attributes = null)
+    /*public function insert() {
+        $params = [];
+        $columns = [];
+        $tableName = static::getTableName();
+        //TODO переделать цикл по state чтобы избавиться от условия
+        foreach ($this as $key => $value) {
+            if ($key === "id") continue;
+            $params[":{$key}"] = $value;
+            $columns[] = "`$key`";
+        }
+        $columns = implode(", ", $columns);
+        $values = implode(", ", array_keys($params));
+
+//INSERT INTO `products`(`id`, `name`, `description`, `price`) VALUES (:name, ,[value-4])
+
+        $sql = "INSERT INTO {$tableName} ({$columns}) VALUES ($values);";
+
+        Db::getInstance()->execute($sql, $params);
+        $this->id = Db::getInstance()->lastInsertId();
+    }*/
+
+    public function insert()
     {
         $keys = [];
         $attr = [];
         $tableName = $this->getTableName();
 
-        foreach ($attributes as $key => $attribute) {
+        var_dump($this);
+
+        /*foreach ($attributes as $key => $attribute) {
             if (isset($attribute) && !is_object($attribute)) {
                 $keys[] = '`' . $key . '`';
                 $attr[] = '\'' . $attribute . '\'';
@@ -70,10 +100,10 @@ abstract class Model implements IModel
         $strAttr = implode(', ', $attr);
 
         $sql = "INSERT INTO {$tableName} ({$strKeys}) VALUES ({$strAttr})";
-        $this->db->execute($sql);
+        $this->db->execute($sql);*/
     }
 
-    public function update(int $id, array $attributes = null)
+    public function update(array $attributes = null)
     {
         $update = [];
         $tableName = $this->getTableName();
@@ -86,21 +116,25 @@ abstract class Model implements IModel
 
         $strUpdate = implode(', ', $update);
         $sql = "UPDATE {$tableName} SET {$strUpdate} WHERE `id` = :id";
-        $this->db->execute($sql, ['id' => $id]);
+        $this->db->execute($sql, ['id' => $this->id]);
     }
 
-    public function delete(int $id)
-    {
-        $tableName = $this->getTableName();
-        $sql = "DELETE FROM {$tableName} WHERE `id` = :id";
-        $this->db->execute($sql, ['id' => $id]);
+    public function delete() {
+        $tableName = static::getTableName();
+        $sql = "DELETE FROM {$tableName} WHERE id = :id";
+        return Db::getInstance()->execute($sql, ['id' => $this->id]);
     }
 
-    public function findOne($params = [])
+    /**
+     * @param array $params
+     * @return array
+     */
+    public static function findOne($params = [])
     {
         $request = [];
         $result = [];
-        $tableName = $this->getTableName();
+        $tableName = static::getTableName();
+
         foreach ($params as $key => $param){
             $request[] = "`$key` = '$param'";
         }
@@ -109,7 +143,7 @@ abstract class Model implements IModel
 
         $sql = "SELECT * FROM {$tableName} WHERE {$strRequest}";
 
-        $queries = (array)$this->db->queryOne($sql);
+        $queries = (array)Db::getInstance()->queryOne($sql);
 
         foreach ($queries as $key => $query) {
             if($key != 'queryString'){
@@ -120,10 +154,10 @@ abstract class Model implements IModel
         return $result;
     }
 
-    public function findAll($params = [])
+    public static function findAll($params = [])
     {
         $request = [];
-        $tableName = $this->getTableName();
+        $tableName = static::getTableName();
 
         foreach ($params as $key => $param){
             $request[] = "`$key` = $param";
@@ -133,22 +167,19 @@ abstract class Model implements IModel
 
         $sql = "SELECT * FROM `{$tableName}` WHERE {$strRequest}";
 
-        $queries = $this->db->queryAll($sql);
+        $queries = Db::getInstance()->queryAll($sql);
 
         return $queries;
     }
 
-    public function getOne(int $id)
-    {
-        $tableName = $this->getTableName();
+    public static function getOne($id) {
+        $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName} WHERE id = :id";
-        return $this->db->queryOne($sql, ['id' => $id]);
+        return Db::getInstance()->queryObject($sql, ['id' => $id], static::class);
     }
-
-    public function getAll()
-    {
-        $tableName = $this->getTableName();
+    public static function getAll() {
+        $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName}";
-        return $this->db->queryAll($sql);
+        return Db::getInstance()->queryAll($sql);
     }
 }

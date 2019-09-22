@@ -9,9 +9,9 @@
 namespace app\models;
 
 
-class Pages
+class Pages extends Model
 {
-    public function getTableName() {
+    public static function getTableName() {
         return 'pages';
     }
 }

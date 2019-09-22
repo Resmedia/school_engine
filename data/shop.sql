@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 18, 2019 at 09:37 AM
+-- Generation Time: Sep 18, 2019 at 12:39 PM
 -- Server version: 5.6.33
 -- PHP Version: 7.1.8
 
@@ -251,8 +251,10 @@ CREATE TABLE `product` (
 INSERT INTO `product` (`id`, `name`, `full_desc`, `price`, `views`, `time_create`, `time_update`) VALUES
 (8, 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Proin eget tortor risus. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.\r\n\r\nNulla porttitor accumsan tincidunt. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vivamus suscipit tortor eget felis porttitor volutpat.\r\n\r\nMauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Pellentesque in ipsum id orci porta dapibus.\r\n\r\nCurabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Nulla porttitor accumsan tincidunt.', 130, 100, 1567419432, 1567419432),
 (26, 'Donec sollicitudin molestie malesuada!', 'Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. \r\n            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec \r\n            velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit \r\n            amet nisl tempus convallis quis ac lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. \r\n            Nulla porttitor accumsan tincidunt.', 3000, 12, 1568730799, 1568730799),
-(30, '777 Donec sollicitudin molestie malesuada!', 'Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. \r\n            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec \r\n            velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit \r\n            amet nisl tempus convallis quis ac lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. \r\n            Nulla porttitor accumsan tincidunt.', 3000, 12, 1568751020, 1568751020),
-(38, 'UPDATED - Donec sollicitudin molestie malesuada!', 'UPDATED - Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. \r\n            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec \r\n            velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit \r\n            amet nisl tempus convallis quis ac lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. \r\n            Nulla porttitor accumsan tincidunt.', 3000, 12, 1568790168, 1568790168);
+(30, 'UPDATED 2 - Donec sollicitudin molestie malesuada!', 'UPDATED - Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. \r\n            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec \r\n            velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit \r\n            amet nisl tempus convallis quis ac lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. \r\n            Nulla porttitor accumsan tincidunt.', 3004, 12, 1568802225, 1568802225),
+(38, 'UPDATED - Donec sollicitudin molestie malesuada!', 'UPDATED - Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. \r\n            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec \r\n            velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit \r\n            amet nisl tempus convallis quis ac lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. \r\n            Nulla porttitor accumsan tincidunt.', 3000, 12, 1568790168, 1568790168),
+(39, 'UPDATED - Donec sollicitudin molestie malesuada!', 'UPDATED - Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. \r\n            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec \r\n            velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit \r\n            amet nisl tempus convallis quis ac lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. \r\n            Nulla porttitor accumsan tincidunt.', 3000, 12, 1568799333, 1568799333),
+(40, 'UPDATED - Donec sollicitudin molestie malesuada!', 'UPDATED - Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. \r\n            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec \r\n            velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit \r\n            amet nisl tempus convallis quis ac lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. \r\n            Nulla porttitor accumsan tincidunt.', 3000, 12, 1568799338, 1568799338);
 
 -- --------------------------------------------------------
 
@@ -368,7 +370,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT for table `users`
 --

@@ -13,7 +13,7 @@ class Basket extends Model
     public $time_create;
     public $time_update;
 
-    public function getTableName() {
+    public static function getTableName() {
         return 'basket';
     }
 

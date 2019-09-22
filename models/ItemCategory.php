@@ -13,7 +13,7 @@ class ItemCategory extends Model
     public $item_id;
     public $category_id;
 
-    public function getTableName()
+    public static function getTableName()
     {
         return 'item_categories';
     }
