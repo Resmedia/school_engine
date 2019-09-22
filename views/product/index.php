@@ -6,10 +6,13 @@
  * Time: 15:45
  */
 
-/** @var $model app\models\Product */
+/** @var $models app\models\Product */
 
-var_dump($model);
 ?>
-
-<h1>HELLO</h1>
-
+<div id="catalog" class="catalog">
+    <?php foreach ($models as $model): ?>
+        <?php $this->useLayouts = false;
+              echo $this->render('_row', ['model' => (object)$model])
+        ?>
+    <?php endforeach;?>
+</div>

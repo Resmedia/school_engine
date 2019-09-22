@@ -40,11 +40,16 @@ class Db
             $this->config['charset']
         );
     }
-    //SELECT * FROM product WHERE id = $id $params = ['id' => 1]
     private function query($sql, $params) {
         $pdoStatement = $this->getConnection()->prepare($sql);
         $pdoStatement->execute($params);
         return $pdoStatement;
+    }
+
+    public function queryObject($sql, $params, $class) {
+        $pdoStatement = $this->query($sql, $params);
+        $pdoStatement->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $class);
+        return $pdoStatement->fetch();
     }
 
     public function execute($sql, $params = []) {
@@ -53,11 +58,11 @@ class Db
     }
 
     public function queryOne($sql, $params = []) {
-        return $this->query($sql, $params)->fetch(PDO::FETCH_LAZY);
+        return $this->queryAll($sql, $params)[0];
     }
 
     public function queryAll($sql, $params = []) {
-        return $this->query($sql, $params)->fetchAll(); // to object PDO::FETCH_CLASS
+        return $this->query($sql, $params)->fetchAll();
     }
 
 }

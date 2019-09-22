@@ -132,7 +132,6 @@ abstract class Model implements IModel
     public static function findOne($params = [])
     {
         $request = [];
-        $result = [];
         $tableName = static::getTableName();
 
         foreach ($params as $key => $param){
@@ -143,13 +142,7 @@ abstract class Model implements IModel
 
         $sql = "SELECT * FROM {$tableName} WHERE {$strRequest}";
 
-        $queries = (array)Db::getInstance()->queryOne($sql);
-
-        foreach ($queries as $key => $query) {
-            if($key != 'queryString'){
-                $result[$key] = $query;
-            }
-        }
+        $result = Db::getInstance()->queryOne($sql);
 
         return $result;
     }

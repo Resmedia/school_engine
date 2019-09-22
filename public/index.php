@@ -9,17 +9,19 @@ spl_autoload_register([new Autoload(), 'loadClass']);
 /** @var $routes */
 
 $getUrl = substr($_SERVER['REQUEST_URI'], 1);
-$request = explode('/', $routes['/' . $getUrl]);
+$returnArray = explode('/', $getUrl);
+$request = explode('/', $routes['/' . $returnArray[0] . (isset($returnArray[1]) ? '/id' : '' )]);
 
-if($request[0]) {
+if($routes['/' . $returnArray[0]]) {
     $controllerName = $request[0];
     $actionName = $request[1];
+    $id = isset($returnArray[1]) ? $returnArray[1] : null;
 
     $controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
 
     if (class_exists($controllerClass)) {
         $controller = new $controllerClass();
-        $controller->runAction($actionName, $controllerName);
+        $controller->runAction($actionName, $controllerName, $id);
     } else {
         echo "Неправильный контроллер";
     }

@@ -8,15 +8,22 @@
 
 namespace app\controllers;
 
-
-use app\models\Menu;
+use app\models\Pages;
 
 class PageController extends Controller
 {
     public function actionIndex() {
-        $menu = Menu::findAll(['status' => Menu::STATUS_PUBLISHED]);
-        echo $this->render('index', [
-            'menu' => $menu,
+
+        echo $this->render('index');
+    }
+
+    public function actionContacts() {
+        $model = Pages::findOne([
+            'url' => 'contacts',
+            'status' => Pages::STATUS_PUBLISHED,
+        ]);
+        echo $this->render('contacts', [
+            'model' => (object)$model
         ]);
     }
 }

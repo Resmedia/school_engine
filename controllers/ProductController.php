@@ -9,16 +9,20 @@ class ProductController extends Controller
 
     public function actionIndex()
     {
-        $model = Product::findAll(['status' => Product::STATUS_PUBLISHED]);
+        $models = Product::findAll(['status' => Product::STATUS_PUBLISHED]);
 
         echo $this->render('index', [
-            'model' => $model
+            'models' => $models
         ]);
     }
 
     public function actionView($id)
     {
+        if (!$id) {
+            return false;
+        }
         $model = Product::getOne($id);
+
         echo $this->render('view', [
             'model' => $model
         ]);

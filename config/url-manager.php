@@ -7,6 +7,8 @@
  */
 $routes =  [
     '/products' => 'product/index',
+    '/products/id' => 'product/view',
     '/' => 'page/index',
+    '/contacts' => 'page/contacts'
 ];
 

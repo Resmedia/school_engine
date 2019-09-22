@@ -11,6 +11,8 @@ namespace app\models;
 
 class Pages extends Model
 {
+    const STATUS_PUBLISHED = 1;
+
     public static function getTableName() {
         return 'pages';
     }
