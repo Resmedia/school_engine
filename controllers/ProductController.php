@@ -9,7 +9,14 @@ class ProductController extends Controller
 
     public function actionIndex()
     {
-        $models = Product::findAll(['status' => Product::STATUS_PUBLISHED]);
+        $limit = isset($_POST['limit']) ? $_POST['limit'] : 5;
+        /** @var $models \app\models\Product */
+        if(isset($_POST['limit'])) {
+            $models = Product::getLimit(intval($limit));
+            return json_encode($models);
+        } else {
+            $models = Product::getLimit(intval($limit));
+        }
 
         echo $this->render('index', [
             'models' => $models
@@ -21,7 +28,11 @@ class ProductController extends Controller
         if (!$id) {
             return false;
         }
+        /** @var $model \app\models\Product */
         $model = Product::getOne($id);
+
+        $model->views += 1;
+        $model->save();
 
         echo $this->render('view', [
             'model' => $model

@@ -15,4 +15,8 @@
               echo $this->render('_row', ['model' => (object)$model])
         ?>
     <?php endforeach;?>
+    <br/>
+    <div class="text-center ">
+        <button id="get-more" class="btn btn-default">Показать еще</button>
+    </div>
 </div>

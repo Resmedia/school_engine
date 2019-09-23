@@ -10,39 +10,18 @@ use app\engine\Db;
  */
 abstract class Model implements IModel
 {
-    /**
-     * @name save
-     * @description Save new item or update dirty attributes in exist item
-    */
-    /*public function save()
-    {
-        $attributes = (array)$this;
-        $dirtyAttributes = [];
 
-        if (!isset($attributes['id'])) {
-            $this->insert($attributes);
-        } else {
-            $items = (array)$this->getOne($attributes['id']);
+    public static function getLimit(int $limit) {
+        $tableName = static::getTableName();
+        $sql = "SELECT * FROM {$tableName} LIMIT {$limit}";
+        return Db::getInstance()->queryAll($sql);
+    }
 
-            if($items && $attributes) {
-                foreach ($items as $itemKey => $item) {
-                    if($itemKey != 'queryString' && $attributes[$itemKey] != $item) {
-                        $dirtyAttributes[$itemKey] = $attributes[$itemKey];
-                    }
-                }
-
-                $this->update($attributes['id'], $dirtyAttributes);
-            }
-        }
+   /* public static function getWhere($condition) {
+        $tableName = static::getTableName();
+        $sql = "SELECT * FROM {$tableName} WHERE {$condition}";
+        return Db::getInstance()->queryAll($sql);
     }*/
-
-    public function getLimit($from, $to) {
-
-    }
-
-    public function getWere($name, $value) {
-
-    }
 
     public function save() {
         if (is_null($this->id)) {
@@ -50,7 +29,6 @@ abstract class Model implements IModel
         } else {
             $this->update();
         }
-
     }
 
     public function remove()
@@ -61,36 +39,13 @@ abstract class Model implements IModel
         }
     }
 
-    /*public function insert() {
-        $params = [];
-        $columns = [];
-        $tableName = static::getTableName();
-        //TODO переделать цикл по state чтобы избавиться от условия
-        foreach ($this as $key => $value) {
-            if ($key === "id") continue;
-            $params[":{$key}"] = $value;
-            $columns[] = "`$key`";
-        }
-        $columns = implode(", ", $columns);
-        $values = implode(", ", array_keys($params));
-
-//INSERT INTO `products`(`id`, `name`, `description`, `price`) VALUES (:name, ,[value-4])
-
-        $sql = "INSERT INTO {$tableName} ({$columns}) VALUES ($values);";
-
-        Db::getInstance()->execute($sql, $params);
-        $this->id = Db::getInstance()->lastInsertId();
-    }*/
-
     public function insert()
     {
         $keys = [];
         $attr = [];
         $tableName = $this->getTableName();
 
-        var_dump($this);
-
-        /*foreach ($attributes as $key => $attribute) {
+        foreach ($this as $key => $attribute) {
             if (isset($attribute) && !is_object($attribute)) {
                 $keys[] = '`' . $key . '`';
                 $attr[] = '\'' . $attribute . '\'';
@@ -100,15 +55,28 @@ abstract class Model implements IModel
         $strAttr = implode(', ', $attr);
 
         $sql = "INSERT INTO {$tableName} ({$strKeys}) VALUES ({$strAttr})";
-        $this->db->execute($sql);*/
+        Db::getInstance()->execute($sql);
     }
 
-    public function update(array $attributes = null)
+    public function update()
     {
         $update = [];
+        $dirtyAttributes = [];
         $tableName = $this->getTableName();
 
-        foreach ($attributes as $key => $attribute) {
+        $oldAttributes = $this->findOne(['id' => $this->id]);
+
+        // Look changes
+        if($oldAttributes && $this) {
+            foreach ($this as $newKey => $newValue) {
+                if ($oldAttributes[$newKey] != $newValue) {
+                    $dirtyAttributes[$newKey] = $newValue;
+                }
+            }
+        }
+
+        // Update only changed elements
+        foreach ($dirtyAttributes as $key => $attribute) {
             if (isset($attribute) && $key !== 'id' && !is_object($attribute)) {
                 $update[] = "`$key` = '$attribute'";
             }
@@ -116,7 +84,7 @@ abstract class Model implements IModel
 
         $strUpdate = implode(', ', $update);
         $sql = "UPDATE {$tableName} SET {$strUpdate} WHERE `id` = :id";
-        $this->db->execute($sql, ['id' => $this->id]);
+        Db::getInstance()->execute($sql, ['id' => $this->id]);
     }
 
     public function delete() {

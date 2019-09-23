@@ -6,9 +6,10 @@
  * Time: 14:55
  */
 $routes =  [
+    '/' => 'page/index',
     '/products' => 'product/index',
     '/products/id' => 'product/view',
-    '/' => 'page/index',
+
     '/contacts' => 'page/contacts'
 ];
 

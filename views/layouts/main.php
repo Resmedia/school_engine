@@ -19,6 +19,7 @@ $menuItems = new MenuWidget($menu)
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/icons.css">
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -53,5 +54,6 @@ $menuItems = new MenuWidget($menu)
             </div>
         </div>
     </footer>
+    <script src="/js/main.js"></script>
 </body>
 </html>
