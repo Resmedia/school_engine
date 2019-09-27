@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+{% block head %}
+    <head>
+        <title>Twig Template document</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/icons.css">
+        <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    </head>
+{% endblock %}
+{% block content %}
+    <body>
+    <div class="container">
+        <div class="top">
+            <header class="header">
+                <nav class="top-nav content">
+                    <ul class="nav">
+                        {% for item in menu %}
+                            {% if item.parent_id == 0 %}
+                                <li class="nav__item">
+                                    <a class="nav__link" href="{{ item.url }}">{{ item.name }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        <li class="nav__item">
+                            <a class="nav__link" href="/cart">
+                                <i class="fa fa-shopping-cart">
+                                    <span class="count-cart">0</span>
+                                </i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+            <section class="content">
+                <h1>{{ model.name }} on Twig</h1>
+
+                {{ model.description|raw }}
+            </section>
+        </div>
+        <footer class="footer">
+            <div class="content">
+                <div class="copyright">
+                    <div class="copyright__left">
+                        &copy; Copyright 2019
+                    </div>
+                    <div class="copyright__right">
+                        All rights received
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script src="/js/main.js"></script>
+    </div>
+    </body>
+{% endblock %}
+</html>

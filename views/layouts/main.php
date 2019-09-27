@@ -54,6 +54,7 @@ $menuItems = new MenuWidget($menu)
             </div>
         </div>
     </footer>
-    <script src="/js/main.js"></script>
+</div>
+<script src="/js/main.js"></script>
 </body>
 </html>

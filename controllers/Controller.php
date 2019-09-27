@@ -25,6 +25,17 @@ abstract class Controller
         }
     }
 
+    public function runTwigAction($action = null, $controller = null, $id = null, $twig) {
+        $this->action = $action ?: $this->defaultAction;
+        $this->controller = $controller;
+        $method = "action" . ucfirst($this->action);
+        if (method_exists($this, $method)) {
+            $this->$method($id, $twig);
+        } else {
+            echo "404";
+        }
+    }
+
     public function render($page, $params = []) {
         if ($this->useLayouts) {
             // TODO Move it to Main controller

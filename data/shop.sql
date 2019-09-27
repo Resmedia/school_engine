@@ -2,10 +2,10 @@
 -- version 4.6.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Sep 18, 2019 at 12:39 PM
--- Server version: 5.6.33
--- PHP Version: 7.1.8
+-- Хост: localhost:3306
+-- Время создания: Сен 23 2019 г., 11:48
+-- Версия сервера: 5.6.33
+-- Версия PHP: 7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `shop`
+-- База данных: `shop`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `basket`
+-- Структура таблицы `basket`
 --
 
 CREATE TABLE `basket` (
@@ -38,7 +38,7 @@ CREATE TABLE `basket` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Структура таблицы `categories`
 --
 
 CREATE TABLE `categories` (
@@ -47,7 +47,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `categories`
+-- Дамп данных таблицы `categories`
 --
 
 INSERT INTO `categories` (`id`, `name`) VALUES
@@ -59,7 +59,7 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `feedback`
+-- Структура таблицы `feedback`
 --
 
 CREATE TABLE `feedback` (
@@ -73,7 +73,7 @@ CREATE TABLE `feedback` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `feedback`
+-- Дамп данных таблицы `feedback`
 --
 
 INSERT INTO `feedback` (`id`, `model_id`, `model`, `user`, `text`, `time_create`, `time_update`) VALUES
@@ -94,7 +94,7 @@ INSERT INTO `feedback` (`id`, `model_id`, `model`, `user`, `text`, `time_create`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gallery_images`
+-- Структура таблицы `gallery_images`
 --
 
 CREATE TABLE `gallery_images` (
@@ -108,7 +108,7 @@ CREATE TABLE `gallery_images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `gallery_images`
+-- Дамп данных таблицы `gallery_images`
 --
 
 INSERT INTO `gallery_images` (`id`, `model_id`, `model`, `url`, `name`, `time_create`, `time_update`) VALUES
@@ -125,7 +125,7 @@ INSERT INTO `gallery_images` (`id`, `model_id`, `model`, `url`, `name`, `time_cr
 -- --------------------------------------------------------
 
 --
--- Table structure for table `images`
+-- Структура таблицы `images`
 --
 
 CREATE TABLE `images` (
@@ -137,7 +137,7 @@ CREATE TABLE `images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `images`
+-- Дамп данных таблицы `images`
 --
 
 INSERT INTO `images` (`id`, `url`, `likes`, `views`, `time_create`) VALUES
@@ -160,7 +160,7 @@ INSERT INTO `images` (`id`, `url`, `likes`, `views`, `time_create`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `item_categories`
+-- Структура таблицы `item_categories`
 --
 
 CREATE TABLE `item_categories` (
@@ -169,7 +169,7 @@ CREATE TABLE `item_categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `item_categories`
+-- Дамп данных таблицы `item_categories`
 --
 
 INSERT INTO `item_categories` (`item_id`, `category_id`) VALUES
@@ -179,7 +179,7 @@ INSERT INTO `item_categories` (`item_id`, `category_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `menu`
+-- Структура таблицы `menu`
 --
 
 CREATE TABLE `menu` (
@@ -192,14 +192,14 @@ CREATE TABLE `menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `menu`
+-- Дамп данных таблицы `menu`
 --
 
 INSERT INTO `menu` (`id`, `parent_id`, `name`, `url`, `position`, `status`) VALUES
 (1, 0, 'Главная', '/', 1, 1),
-(2, 0, 'Каталог', '/catalog', 2, 1),
+(2, 0, 'Каталог', '/products', 2, 1),
 (4, 0, 'Контакты', '/contacts', 5, 1),
-(5, 0, 'Отзывы', '/feedback', 4, 0),
+(5, 0, 'Отзывы', '/feedback', 4, 1),
 (7, 2, 'Каталог 1', '/catalog_1', 0, 1),
 (8, 2, 'Каталог 2', '/catalog_2', 0, 1),
 (9, 2, 'Каталог 3', '/catalog_3', 0, 1),
@@ -208,7 +208,7 @@ INSERT INTO `menu` (`id`, `parent_id`, `name`, `url`, `position`, `status`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pages`
+-- Структура таблицы `pages`
 --
 
 CREATE TABLE `pages` (
@@ -222,7 +222,7 @@ CREATE TABLE `pages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `pages`
+-- Дамп данных таблицы `pages`
 --
 
 INSERT INTO `pages` (`id`, `name`, `description`, `status`, `url`, `time_create`, `time_update`) VALUES
@@ -231,7 +231,7 @@ INSERT INTO `pages` (`id`, `name`, `description`, `status`, `url`, `time_create`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Структура таблицы `product`
 --
 
 CREATE TABLE `product` (
@@ -240,26 +240,28 @@ CREATE TABLE `product` (
   `full_desc` text,
   `price` int(255) NOT NULL DEFAULT '0',
   `views` int(255) NOT NULL DEFAULT '0',
+  `status` smallint(2) NOT NULL,
   `time_create` int(11) NOT NULL DEFAULT '0',
   `time_update` int(255) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `product`
+-- Дамп данных таблицы `product`
 --
 
-INSERT INTO `product` (`id`, `name`, `full_desc`, `price`, `views`, `time_create`, `time_update`) VALUES
-(8, 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Proin eget tortor risus. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.\r\n\r\nNulla porttitor accumsan tincidunt. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vivamus suscipit tortor eget felis porttitor volutpat.\r\n\r\nMauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Pellentesque in ipsum id orci porta dapibus.\r\n\r\nCurabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Nulla porttitor accumsan tincidunt.', 130, 100, 1567419432, 1567419432),
-(26, 'Donec sollicitudin molestie malesuada!', 'Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. \r\n            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec \r\n            velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit \r\n            amet nisl tempus convallis quis ac lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. \r\n            Nulla porttitor accumsan tincidunt.', 3000, 12, 1568730799, 1568730799),
-(30, 'UPDATED 2 - Donec sollicitudin molestie malesuada!', 'UPDATED - Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. \r\n            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec \r\n            velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit \r\n            amet nisl tempus convallis quis ac lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. \r\n            Nulla porttitor accumsan tincidunt.', 3004, 12, 1568802225, 1568802225),
-(38, 'UPDATED - Donec sollicitudin molestie malesuada!', 'UPDATED - Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. \r\n            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec \r\n            velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit \r\n            amet nisl tempus convallis quis ac lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. \r\n            Nulla porttitor accumsan tincidunt.', 3000, 12, 1568790168, 1568790168),
-(39, 'UPDATED - Donec sollicitudin molestie malesuada!', 'UPDATED - Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. \r\n            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec \r\n            velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit \r\n            amet nisl tempus convallis quis ac lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. \r\n            Nulla porttitor accumsan tincidunt.', 3000, 12, 1568799333, 1568799333),
-(40, 'UPDATED - Donec sollicitudin molestie malesuada!', 'UPDATED - Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. \r\n            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec \r\n            velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit \r\n            amet nisl tempus convallis quis ac lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. \r\n            Nulla porttitor accumsan tincidunt.', 3000, 12, 1568799338, 1568799338);
+INSERT INTO `product` (`id`, `name`, `full_desc`, `price`, `views`, `status`, `time_create`, `time_update`) VALUES
+(8, 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Proin eget tortor risus. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.\r\n\r\nNulla porttitor accumsan tincidunt. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vivamus suscipit tortor eget felis porttitor volutpat.\r\n\r\nMauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Pellentesque in ipsum id orci porta dapibus.\r\n\r\nCurabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Nulla porttitor accumsan tincidunt.', 130, 127, 1, 1567419432, 1567419432),
+(26, 'Donec sollicitudin molestie malesuada!', 'Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. \r\n            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec \r\n            velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit \r\n            amet nisl tempus convallis quis ac lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. \r\n            Nulla porttitor accumsan tincidunt.', 3000, 25, 1, 1568730799, 1568730799),
+(30, 'UPDATED 2 - Donec sollicitudin molestie malesuada!', 'UPDATED - Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. \r\n            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec \r\n            velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit \r\n            amet nisl tempus convallis quis ac lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. \r\n            Nulla porttitor accumsan tincidunt.', 3004, 13, 1, 1568802225, 1568802225),
+(38, 'UPDATED - Donec sollicitudin molestie malesuada!', 'UPDATED - Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. \r\n            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec \r\n            velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit \r\n            amet nisl tempus convallis quis ac lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. \r\n            Nulla porttitor accumsan tincidunt.', 3000, 12, 1, 1568790168, 1568790168),
+(39, 'UPDATED - Donec sollicitudin molestie malesuada!', 'UPDATED - Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. \r\n            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec \r\n            velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit \r\n            amet nisl tempus convallis quis ac lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. \r\n            Nulla porttitor accumsan tincidunt.', 3000, 12, 1, 1568799333, 1568799333),
+(40, 'UPDATED - Donec sollicitudin molestie malesuada!', 'UPDATED - Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. \r\n            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec \r\n            velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit \r\n            amet nisl tempus convallis quis ac lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. \r\n            Nulla porttitor accumsan tincidunt.', 3000, 12, 1, 1568799338, 1568799338),
+(41, 'Donec sollicitudin molestie malesuada!', 'Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. \r\n            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec \r\n            velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit \r\n            amet nisl tempus convallis quis ac lectus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. \r\n            Nulla porttitor accumsan tincidunt.', 3004, 12, 1, 1569152039, 1569152039);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Структура таблицы `users`
 --
 
 CREATE TABLE `users` (
@@ -275,7 +277,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Дамп данных таблицы `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password_hash`, `default_hash`, `role`, `status`, `time_create`, `time_update`) VALUES
@@ -283,96 +285,96 @@ INSERT INTO `users` (`id`, `name`, `email`, `password_hash`, `default_hash`, `ro
 (2, 'Админ', 'test@test.ru', '$2y$10$g4i6YlRZ2cGX.jh.LnayEOoBuRhC7VnzyE3SNOzU5Zm39XKXkobZG', NULL, 'admin', 1, 1567420019, 1567676187);
 
 --
--- Indexes for dumped tables
+-- Индексы сохранённых таблиц
 --
 
 --
--- Indexes for table `basket`
+-- Индексы таблицы `basket`
 --
 ALTER TABLE `basket`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `categories`
+-- Индексы таблицы `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `feedback`
+-- Индексы таблицы `feedback`
 --
 ALTER TABLE `feedback`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `gallery_images`
+-- Индексы таблицы `gallery_images`
 --
 ALTER TABLE `gallery_images`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `images`
+-- Индексы таблицы `images`
 --
 ALTER TABLE `images`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `menu`
+-- Индексы таблицы `menu`
 --
 ALTER TABLE `menu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `pages`
+-- Индексы таблицы `pages`
 --
 ALTER TABLE `pages`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `url` (`url`);
 
 --
--- Indexes for table `product`
+-- Индексы таблицы `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Индексы таблицы `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT для сохранённых таблиц
 --
 
 --
--- AUTO_INCREMENT for table `feedback`
+-- AUTO_INCREMENT для таблицы `feedback`
 --
 ALTER TABLE `feedback`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
--- AUTO_INCREMENT for table `gallery_images`
+-- AUTO_INCREMENT для таблицы `gallery_images`
 --
 ALTER TABLE `gallery_images`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
--- AUTO_INCREMENT for table `images`
+-- AUTO_INCREMENT для таблицы `images`
 --
 ALTER TABLE `images`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
--- AUTO_INCREMENT for table `pages`
+-- AUTO_INCREMENT для таблицы `pages`
 --
 ALTER TABLE `pages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `product`
+-- AUTO_INCREMENT для таблицы `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
