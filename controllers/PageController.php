@@ -8,7 +8,6 @@
 
 namespace app\controllers;
 
-use app\models\Menu;
 use app\models\Pages;
 
 class PageController extends Controller
@@ -18,16 +17,13 @@ class PageController extends Controller
         echo $this->render('index');
     }
 
-    public function actionContacts($id = null, $twig) {
-        $menu = Menu::findAll(['status' => Menu::STATUS_PUBLISHED]);
+    public function actionContacts() {
         $model = Pages::findOne([
             'url' => 'contacts',
             'status' => Pages::STATUS_PUBLISHED,
         ]);
-
-        echo $twig->render('index.tmpl', [
-            'model' => (object)$model,
-            'menu' => $menu
+        echo $this->render('contacts', [
+            'model' => (object)$model
         ]);
     }
 }

@@ -1,15 +1,10 @@
 <?
 
-require(__DIR__ . "/../config/config.php");
-require(__DIR__ . "/../engine/Autoload.php");
-require(__DIR__ . "/../config/url-manager.php");
-require(__DIR__ . '/../vendor/autoload.php');
-
-$loader = new \Twig\Loader\FilesystemLoader(TEMPLATES_TWIG_DIR);
+include $_SERVER['DOCUMENT_ROOT'] . "/../config/config.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/../engine/Autoload.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/../config/url-manager.php";
 
 spl_autoload_register([new Autoload(), 'loadClass']);
-
-$twig = new \Twig\Environment($loader, ['debug' => true]);
 
 /** @var $routes */
 
@@ -26,12 +21,7 @@ if($routes['/' . $returnArray[0]]) {
 
     if (class_exists($controllerClass)) {
         $controller = new $controllerClass();
-        if($controllerName == 'page') {
-            $controller->runTwigAction($actionName, $controllerName, $id, $twig);
-        } else {
-            $controller->runAction($actionName, $controllerName, $id);
-        }
-
+        $controller->runAction($actionName, $controllerName, $id);
     } else {
         echo "Неправильный контроллер";
     }
