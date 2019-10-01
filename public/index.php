@@ -1,30 +1,37 @@
 <?
+session_start();
 
-include $_SERVER['DOCUMENT_ROOT'] . "/../config/config.php";
-include $_SERVER['DOCUMENT_ROOT'] . "/../engine/Autoload.php";
-include $_SERVER['DOCUMENT_ROOT'] . "/../config/url-manager.php";
+use app\engine\Render;
+use app\engine\Request;
+use app\engine\RequestException;
 
-spl_autoload_register([new Autoload(), 'loadClass']);
+try {
 
-/** @var $routes */
+    include $_SERVER['DOCUMENT_ROOT'] . "/../config/config.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/../vendor/autoload.php";
 
-$getUrl = substr($_SERVER['REQUEST_URI'], 1);
-$returnArray = explode('/', $getUrl);
-$request = explode('/', $routes['/' . $returnArray[0] . (isset($returnArray[1]) ? '/id' : '' )]);
+    $request = new Request();
 
-if($routes['/' . $returnArray[0]]) {
-    $controllerName = $request[0];
-    $actionName = $request[1];
-    $id = isset($returnArray[1]) ? $returnArray[1] : null;
+    $controllerName = $request->getControllerName() ?: 'product';
+    $actionName = $request->getActionName();
 
     $controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
 
     if (class_exists($controllerClass)) {
-        $controller = new $controllerClass();
-        $controller->runAction($actionName, $controllerName, $id);
+        $controller = new $controllerClass(new Render());
+        $controller->runAction($actionName);
     } else {
-        echo "Неправильный контроллер";
+        echo "Не правильный контроллер";
     }
-} else {
-    throw new ErrorException('Страница не существует', 404);
 }
+catch (\PDOException $e) {
+    var_dump("Ошибка PDO");
+}
+catch (RequestException $e) {
+    var_dump("Ошибка request");
+}
+catch (\Exception $e) {
+    var_dump($e);
+    var_dump($e->getTrace());
+}
+

@@ -3,7 +3,6 @@
 namespace app\engine;
 
 use app\traits\Tsingletone;
-use \PDO;
 
 class Db
 {
@@ -13,7 +12,7 @@ class Db
         'login' => 'root',
         'password' => 'root',
         'database' => 'shop',
-        'charset' => 'utf8',
+        'charset' => 'utf8'
     ];
 
     use Tsingletone;
@@ -22,12 +21,12 @@ class Db
 
     private function getConnection() {
         if (is_null($this->connection)) {
-            // var_dump("Подключаюсь к БД...");
-            $this->connection =  new PDO($this->prepareDSNstring(),
+            $this->connection =  new \PDO($this->prepareDSNstring(),
                 $this->config['login'],
                 $this->config['password']);
 
-            $this->connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            $this->connection->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+            $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         }
        return $this->connection;
     }
@@ -40,9 +39,17 @@ class Db
             $this->config['charset']
         );
     }
+//SELECT * FROM product WHERE id = $id $params = ['id' => 1]
     private function query($sql, $params) {
         $pdoStatement = $this->getConnection()->prepare($sql);
         $pdoStatement->execute($params);
+        return $pdoStatement;
+    }
+    private function queryLimit($sql, $from, $to) {
+        $pdoStatement = $this->getConnection()->prepare($sql);
+        $pdoStatement->bindValue(':from', $from, \PDO::PARAM_INT);
+        $pdoStatement->bindValue(':to', $to, \PDO::PARAM_INT);
+        $pdoStatement->execute();
         return $pdoStatement;
     }
 
@@ -63,6 +70,10 @@ class Db
 
     public function queryAll($sql, $params = []) {
         return $this->query($sql, $params)->fetchAll();
+    }
+
+    public function lastInsertId() {
+        return $this->connection->lastInsertId();
     }
 
 }

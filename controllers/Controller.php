@@ -3,49 +3,63 @@
 
 namespace app\controllers;
 
-use app\models\Menu;
+use app\engine\Render;
+use app\interfaces\IRenderer;
+use app\models\Basket;
+use app\models\repositories\BasketRepository;
+use app\models\repositories\UserRepository;
+use app\models\User;
 
 abstract class Controller
 {
     private $action;
     private $defaultAction = "index";
-    private $layouts = "layouts";
     private $layout = 'main';
     private $useLayouts = true;
-    private $controller;
+    private $renderer;
 
-    public function runAction($action = null, $controller = null, $id = null) {
+    /**
+     * Controller constructor.
+     * @param $renderer
+     */
+    public function __construct(IRenderer $renderer)
+    {
+        $this->renderer = $renderer;
+    }
+
+
+    public function runAction($action = null)
+    {
         $this->action = $action ?: $this->defaultAction;
-        $this->controller = $controller;
         $method = "action" . ucfirst($this->action);
+
         if (method_exists($this, $method)) {
-            $this->$method($id);
+            $this->$method();
         } else {
             echo "404";
         }
     }
 
-    public function render($page, $params = []) {
+    public function render($template, $params = [])
+    {
         if ($this->useLayouts) {
-            // TODO Move it to Main controller
-            $menu = Menu::findAll(['status' => Menu::STATUS_PUBLISHED]);
-            return $this->renderTemplate("{$this->layout}", [
-                'content' => $this->renderTemplate($page, $params),
-                'menu' => $menu
+            return $this->renderTemplate("layouts/{$this->layout}", [
+                'content' => $this->renderTemplate($template, $params),
+                'auth' => (new UserRepository())->isAuth(),
+                'username' => (new UserRepository())->getName(),
+                'menu' => $this->renderTemplate('menu', [
+                    'count' => (new BasketRepository())->getCountWhere('session_id', session_id())
+
+                ])
             ]);
         } else {
-            return $this->renderTemplate($page, $params);
+            return $this->renderTemplate($template, $params);
         }
     }
 
-    public function renderTemplate($page, $params = []) {
-        ob_start();
-        extract($params);
-        $templatePath = TEMPLATES_DIR . ($page == $this->layout ?
-                $this->layouts . DIRECTORY_SEPARATOR . $page . ".php" :
-                $this->controller . DIRECTORY_SEPARATOR  . $page . ".php"
-            );
-        include $templatePath;
-        return ob_get_clean();
+    public function renderTemplate($template, $params = [])
+    {
+        return $this->renderer->renderTemplate($template, $params);
     }
+
 }

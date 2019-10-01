@@ -2,49 +2,36 @@
 
 namespace app\controllers;
 
+use app\engine\Request;
+use app\models\Basket;
 use app\models\Product;
+use app\models\repositories\ProductRepository;
 
 class ProductController extends Controller
 {
 
-    public function actionIndex()
-    {
-        $limit = isset($_POST['limit']) ? $_POST['limit'] : 5;
-        /** @var $models \app\models\Product */
-        if(isset($_POST['limit'])) {
-            $models = Product::getLimit(intval($limit));
-            return json_encode($models);
-        } else {
-            $models = Product::getLimit(intval($limit));
-        }
 
-        echo $this->render('index', [
-            'models' => $models
-        ]);
+    public function actionIndex() {
+        echo $this->render('index');
     }
 
-    public function actionView($id)
-    {
-        if (!$id) {
-            return false;
-        }
-        /** @var $model \app\models\Product */
-        $model = Product::getOne($id);
-
-        $model->views += 1;
-        $model->save();
-
-        echo $this->render('view', [
-            'model' => $model
-        ]);
+    public function actionCatalog() {
+        $catalog = (new ProductRepository())->getAll();
+        echo $this->render('catalog', ['catalog' => $catalog]);
     }
 
-    public function actionCard()
-    {
+
+    public function actionCard() {
         $id = $_GET['id'];
-        $product = Product::getOne($id);
-        echo $this->render('card', [
-            'product' => $product
-        ]);
+
+        if ($id == 0) {
+            throw new \Exception("Продукт не найден", 404);
+        }
+
+        $product = (new ProductRepository())->getOne($id);
+        echo $this->render('card', ['product' => $product]);
     }
+
+
+
 }
