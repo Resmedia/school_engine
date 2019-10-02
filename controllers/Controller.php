@@ -3,12 +3,10 @@
 
 namespace app\controllers;
 
-use app\engine\Render;
+use app\engine\Request;
 use app\interfaces\IRenderer;
-use app\models\Basket;
 use app\models\repositories\BasketRepository;
 use app\models\repositories\UserRepository;
-use app\models\User;
 
 abstract class Controller
 {
@@ -18,15 +16,17 @@ abstract class Controller
     private $useLayouts = true;
     private $renderer;
 
+    public $request;
+
     /**
      * Controller constructor.
      * @param $renderer
      */
     public function __construct(IRenderer $renderer)
     {
+        $this->request = new Request();
         $this->renderer = $renderer;
     }
-
 
     public function runAction($action = null)
     {
@@ -42,13 +42,16 @@ abstract class Controller
 
     public function render($template, $params = [])
     {
+        $user = new UserRepository();
+        $basket = new BasketRepository();
+
         if ($this->useLayouts) {
             return $this->renderTemplate("layouts/{$this->layout}", [
                 'content' => $this->renderTemplate($template, $params),
-                'auth' => (new UserRepository())->isAuth(),
-                'username' => (new UserRepository())->getName(),
+                'auth' => $user->isAuth(),
+                'username' => $user->getName(),
                 'menu' => $this->renderTemplate('menu', [
-                    'count' => (new BasketRepository())->getCountWhere('session_id', session_id())
+                    'count' => $basket->getCountWhere('session_id', session_id())
 
                 ])
             ]);

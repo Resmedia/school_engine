@@ -18,7 +18,6 @@ abstract class Repository extends Models
         $this->db =  Db::getInstance();
     }
 
-
     public function deleteByIdWhere($id, $field, $value) {
         $tableName = $this->getTableName();
         $sql = "DELETE FROM {$tableName} WHERE id = :id  AND `$field`=:$field";
@@ -44,24 +43,21 @@ abstract class Repository extends Models
     }
 
     public function insert(DataEntity $entity) {
-        $params = [];
-        $columns = [];
+        $keys = [];
+        $attr = [];
         $tableName = $this->getTableName();
-        //TODO переделать цикл по state чтобы избавиться от условия
-        foreach ($entity as $key => $value) {
-            if ($key === "id") continue;
-            $params[":{$key}"] = $value;
-            $columns[] = "`$key`";
+
+        foreach ($entity as $key => $attribute) {
+            if (isset($attribute) && !is_object($attribute)) {
+                $keys[] = '`' . $key . '`';
+                $attr[] = '\'' . $attribute . '\'';
+            }
         }
-        $columns = implode(", ", $columns);
-        $values = implode(", ", array_keys($params));
+        $strKeys = implode(', ', $keys);
+        $strAttr = implode(', ', $attr);
 
-//INSERT INTO `products`(`id`, `name`, `description`, `price`) VALUES (:name, ,[value-4])
-
-        $sql = "INSERT INTO {$tableName} ({$columns}) VALUES ($values);";
-
-        $this->db->execute($sql, $params);
-        $entity->id = $this->db->lastInsertId();
+        $sql = "INSERT INTO {$tableName} ({$strKeys}) VALUES ({$strAttr})";
+        return $this->db->execute($sql);
     }
 
     public function delete($entity) {
@@ -69,8 +65,36 @@ abstract class Repository extends Models
         $sql = "DELETE FROM {$tableName} WHERE id = :id";
         return $this->db->execute($sql, ['id' => $entity->id]);
     }
-    public function update($entity) {
-        //TODO реализовать умный update (цикл по state)
+
+    public function update(DataEntity $entity) {
+
+        $arrEntity = (array)$entity;
+
+        $update = [];
+        $dirtyAttributes = [];
+        $tableName = $this->getTableName();
+
+        $oldAttributes = (array)$this->getOne($arrEntity['id']);
+
+        // Look changes
+        if($oldAttributes && $arrEntity) {
+            foreach ($arrEntity as $newKey => $newValue) {
+                if ($oldAttributes[$newKey] != $newValue) {
+                    $dirtyAttributes[$newKey] = $newValue;
+                }
+            }
+        }
+
+        // Update only changed elements
+        foreach ($dirtyAttributes as $key => $attribute) {
+            if (isset($attribute) && $key !== 'id' && !is_object($attribute)) {
+                $update[] = "`$key` = '$attribute'";
+            }
+        }
+
+        $strUpdate = implode(', ', $update);
+        $sql = "UPDATE {$tableName} SET {$strUpdate} WHERE `id` = :id";
+        return $this->db->execute($sql, ['id' => $entity->id]);
     }
 
     public function save($entity) {

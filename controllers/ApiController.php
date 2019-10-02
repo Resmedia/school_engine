@@ -2,8 +2,6 @@
 
 namespace app\controllers;
 
-
-use app\engine\Request;
 use app\models\entities\Basket;
 use app\models\repositories\BasketRepository;
 
@@ -11,13 +9,13 @@ class ApiController extends Controller
 {
     public function actionAddBasket()
     {
+        $repo = new BasketRepository();
 
-        (new BasketRepository())->save(new Basket(session_id(), (new Request())->getParams()['id']));
-
+        $repo->save(new Basket(session_id(), $this->request->getParams()['id']));
 
         $response = [
             'result' => 1,
-            'count' => (new BasketRepository())->getCountWhere('session_id', session_id())
+            'count' => $repo->getCountWhere('session_id', session_id())
         ];
         header('Content-Type: application/json');
         echo json_encode($response);
@@ -26,23 +24,16 @@ class ApiController extends Controller
 
     public function actiondelFromBasket()
     {
+        $repo = new BasketRepository();
 
-        $id = (new Request())->getParams()['id'];
+        $id = $this->request->getParams()['id'];
         $session = session_id();
-        /*
-        $basket = Basket::getOne($id);
-        if ($session == $basket->session_id)
-            $basket->delete();
-        */
-//DELETE FROM basket WHERE id=1 AND session_id='23123';
-        //Вариант оптимальный
 
-        (new BasketRepository())->deleteByIdWhere($id, 'session_id', $session);
-
+        $repo->deleteByIdWhere($id, 'session_id', $session);
 
         $response = [
             'result' => 1,
-            'count' => (new BasketRepository())->getCountWhere('session_id', $session)
+            'count' => $repo->getCountWhere('session_id', $session)
         ];
 
         header('Content-Type: application/json');

@@ -2,8 +2,6 @@
 
 namespace app\models\entities;
 
-use app\models\entities\DataEntity;
-
 class Product extends DataEntity
 {
     public $id;
@@ -24,9 +22,4 @@ class Product extends DataEntity
         $this->description = $description;
         $this->price = $price;
     }
-
-
-
-
-
 }

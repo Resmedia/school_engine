@@ -25,7 +25,7 @@ class Request {
         $this->method = $_SERVER['REQUEST_METHOD'];
         $url = explode('/', $this->requestString);
         $this->controllerName = $url[1];
-        $this->actionName = $url[2];
+        $this->actionName = isset($url[2]) ? $url[2] : '';
         $this->params = $_REQUEST;
         //парсинг json-post данных
         $data = json_decode(file_get_contents('php://input'));
