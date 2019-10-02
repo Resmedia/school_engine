@@ -68,5 +68,19 @@ class Request {
         return $this->params;
     }
 
+    public function redirect(string $location, $replace = null, $code = null)
+    {
+        header("Location: $location", $replace, $code);
+    }
+
+    public function post(string $value)
+    {
+        return isset($_POST[$value]) ? $_POST[$value] : false;
+    }
+
+    public function get(string $value)
+    {
+        return isset($_GET[$value]) ? $_GET[$value] : false;
+    }
 
 }

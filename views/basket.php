@@ -16,7 +16,7 @@
         elem.addEventListener('click', () => {
             let id = elem.getAttribute('data-id');
             (async () => {
-                const response = await fetch('/Api/delFromBasket/', {
+                const response = await fetch('/Api/RemoveFromBasket/', {
                     method: 'POST',
                     headers: new Headers({
                         'Content-Type': 'application/json'

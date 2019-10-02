@@ -1,7 +1,9 @@
 <?php
 namespace app\models;
 
+use app\engine\Cookies;
 use app\engine\Db;
+use app\engine\Session;
 use app\models\entities\DataEntity;
 
 /**
@@ -13,8 +15,13 @@ abstract class Repository extends Models
 {
     protected $db;
 
+    public $session;
+    public $cookies;
+
     public function __construct()
     {
+        $this->cookies = new Cookies();
+        $this->session = new Session();
         $this->db =  Db::getInstance();
     }
 

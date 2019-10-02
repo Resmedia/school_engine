@@ -9,7 +9,6 @@ use ErrorException;
 
 class UserRepository extends Repository
 {
-
     public function getTableName()
     {
         return 'users';
@@ -18,20 +17,27 @@ class UserRepository extends Repository
     public function isAuth()
     {
         $model = new UserRepository();
-        if (isset($_COOKIE["hash"])) {
 
-            $hash = $_COOKIE["hash"];
+        if ($this->cookies->getValue('hash')) {
+            $hash = $this->cookies->getValue('hash');
             $user = $model->getUserByHash($hash);
-            if ($_SESSION['email'] == $user->email) {
-                echo true;
+            if ($this->session->getValue('email') &&
+                $this->session->getValue('email') == $user->email) {
+                return true;
             }
         }
-        echo false;
+        return false;
     }
 
     public function getName()
     {
-        return $this->isAuth() ? $this->getEntityClass()->name : "Guest";
+        $model = new UserRepository();
+        $hash = '';
+        if ($this->cookies->getValue('hash')) {
+            $hash = $this->cookies->getValue('hash');
+        }
+        $user = $model->getUserByHash($hash);
+        return isset($user->name) ? $user->name : "Guest";
     }
 
     public function getEntityClass()

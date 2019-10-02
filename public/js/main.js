@@ -42,6 +42,7 @@ loginBtn.click(e => {
                 if(!newData.status) {
                     addError(newData.message, loginForm);
                 } else {
+                    setCookie('hash', newData.hash, 1);
                     document.location.reload(true);
                 }
             })
@@ -81,7 +82,8 @@ signBtn.click(e => {
                 if(!newData.status) {
                     addError(newData.message, signForm);
                 } else {
-                    console.log(newData)
+                    setCookie('hash', newData.hash, 1);
+                    document.location.reload(true);
                 }
             })
         }
@@ -102,6 +104,7 @@ addError = (message, form, field = null) => {
     helpBlock.addClass('invalid-feedback d-block');
     helpBlock.html(message);
 };
+
 removeError = (form, field) => {
     form.removeClass('needs-validation');
     let helpBlock = form.find('.help-block');
@@ -109,5 +112,13 @@ removeError = (form, field) => {
     helpBlock.removeClass('invalid-feedback d-block');
     helpBlock.html('');
 };
+
+setCookie = (cname, cvalue, exdays) => {
+    let d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+};
+
 isValidEmail = email => !!email.match(/@.+\./);
 isValidPassword = password => !password.match(/\s/);

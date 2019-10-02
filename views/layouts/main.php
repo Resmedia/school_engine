@@ -11,9 +11,9 @@
 </head>
 <body>
 <div class="container">
-    <? if ($auth): ?>
+    <?php if ($auth): ?>
         Добро пожаловать <?= $username ?> <a href="/user/logout/"> [Выход]</a>
-    <? else: ?>
+    <?php else: ?>
         <br/><br/>
         <label>Вход:</label>
         <br>
@@ -47,11 +47,11 @@
             </div>
             <div class="help-block"></div>
         </div>
-    <? endif; ?><br>
+    <?php endif; ?><br>
 
     <?= $menu ?><br>
     <?= $content ?>
 </div>
-<script src="/js/main.js"></script>
+<script src="/js/main.js?_=<?= time() ?>"></script>
 </body>
 </html>

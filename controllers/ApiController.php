@@ -22,7 +22,7 @@ class ApiController extends Controller
         exit;
     }
 
-    public function actiondelFromBasket()
+    public function actionRemoveFromBasket()
     {
         $repo = new BasketRepository();
 

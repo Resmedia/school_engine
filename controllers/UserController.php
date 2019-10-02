@@ -12,8 +12,8 @@ class UserController extends Controller
     {
         $repo = new UserRepository();
         
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        $email =  $this->request->post('email');
+        $password = $this->request->post('password');
 
         $email = strip_tags(stripslashes($email));
         $email = preg_replace('/\s+/', '', $email);
@@ -42,15 +42,16 @@ class UserController extends Controller
             if ($user) {
                 if (password_verify($password, $user->password_hash)) {
                     $hash = $repo->setDefaultHash(11, $email);
-                    setcookie("hash", $hash, time() + 3600);
-                    $_SESSION['email'] = $email;
-                    $_SESSION['id'] = $user->id;
-
+                    $this->session->setValue([
+                        'email' => $email,
+                        'id' => $user->id
+                    ]);
                     $result = [
+                        'hash' => $hash,
                         'status' => true,
                     ];
                     echo json_encode($result);
-                    return false;
+                    return true;
                 }
                 $error = [
                     'message' =>  User::ERRORS['password_user_error'],
@@ -78,9 +79,9 @@ class UserController extends Controller
     {
         $repo = new UserRepository();
 
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $name = $_POST['name'];
+        $email =  $this->request->post('email');
+        $password = $this->request->post('password');
+        $name = $this->request->post('name');
 
         $email = strip_tags(stripslashes($email));
         $name = strip_tags(stripslashes($name));
@@ -125,16 +126,17 @@ class UserController extends Controller
                 $user = $repo->getUser($email);
 
                 if($user){
-                    setcookie("hash", $default_hash, time() + 3600);
-                    $_SESSION['email'] = $email;
-                    $_SESSION['id'] = $user[0]['id'];
-                    header("Location: /");
+                    $this->session->setValue([
+                        'email' => $email,
+                        'id' => $user->id
+                    ]);
 
                     $result = [
-                        'data' => $user,
+                        'hash' => $default_hash,
                         'status' => true,
                     ];
                     echo json_encode($result);
+                    return true;
                 }
 
                 $error = [
@@ -162,8 +164,9 @@ class UserController extends Controller
     }
 
     public function actionLogout() {
-        session_destroy();
-        header("Location: /");
+        $this->session->destroy();
+        $this->cookies->setCookies("hash", '');
+        $this->request->redirect('/');
         exit();
     }
 }
