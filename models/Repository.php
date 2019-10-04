@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models;
 
 use app\engine\Cookies;
@@ -10,7 +11,6 @@ use app\models\entities\DataEntity;
  * Class Model
  * @package app\models
  */
-
 abstract class Repository extends Models
 {
     protected $db;
@@ -22,34 +22,39 @@ abstract class Repository extends Models
     {
         $this->cookies = new Cookies();
         $this->session = new Session();
-        $this->db =  Db::getInstance();
+        $this->db = Db::getInstance();
     }
 
-    public function deleteByIdWhere($id, $field, $value) {
+    public function deleteByIdWhere($id, $field, $value)
+    {
         $tableName = $this->getTableName();
         $sql = "DELETE FROM {$tableName} WHERE id = :id  AND `$field`=:$field";
         return $this->db->execute($sql, ['id' => $id, "$field" => $value]);
-}
-
-    public function getCountWhere($field, $value) {
-        $tableName = $this->getTableName();
-        $sql = "SELECT count(*) as count FROM {$tableName} WHERE `$field`=:$field";
-        return $this->db->queryOne($sql, ["$field"=>$value])['count'];
     }
 
-    public function getLimit($from, $to) {
+    public function getCountWhere($field, $value)
+    {
+        $tableName = $this->getTableName();
+        $sql = "SELECT count(*) as count FROM {$tableName} WHERE `$field`=:$field";
+        return $this->db->queryOne($sql, ["$field" => $value])['count'];
+    }
+
+    public function getLimit($from, $to)
+    {
         $tableName = $this->getTableName();
         $sql = "SELECT * FROM {$tableName} LIMIT :from, :to";
         return $this->db->queryLimit($sql, $from, $to);
-}
-
-    public function getWhere($field, $value) {
-        $tableName = $this->getTableName();
-        $sql = "SELECT * FROM {$tableName} WHERE `$field`=:$field";
-        return $this->db->queryObject($sql, ["$field"=>$value], $this->getEntityClass());
     }
 
-    public function insert(DataEntity $entity) {
+    public function getWhere($field, $value)
+    {
+        $tableName = $this->getTableName();
+        $sql = "SELECT * FROM {$tableName} WHERE `$field`=:$field";
+        return $this->db->queryObject($sql, ["$field" => $value], $this->getEntityClass());
+    }
+
+    public function insert(DataEntity $entity)
+    {
         $keys = [];
         $attr = [];
         $tableName = $this->getTableName();
@@ -67,13 +72,22 @@ abstract class Repository extends Models
         return $this->db->execute($sql);
     }
 
-    public function delete($entity) {
+    public function delete($entity)
+    {
         $tableName = $this->getTableName();
         $sql = "DELETE FROM {$tableName} WHERE id = :id";
         return $this->db->execute($sql, ['id' => $entity->id]);
     }
 
-    public function update(DataEntity $entity) {
+    public function deleteById($id)
+    {
+        $tableName = $this->getTableName();
+        $sql = "DELETE FROM {$tableName} WHERE id = :id";
+        return $this->db->execute($sql, ['id' => $id]);
+    }
+
+    public function update(DataEntity $entity)
+    {
 
         $arrEntity = (array)$entity;
 
@@ -84,7 +98,7 @@ abstract class Repository extends Models
         $oldAttributes = (array)$this->getOne($arrEntity['id']);
 
         // Look changes
-        if($oldAttributes && $arrEntity) {
+        if ($oldAttributes && $arrEntity) {
             foreach ($arrEntity as $newKey => $newValue) {
                 if ($oldAttributes[$newKey] != $newValue) {
                     $dirtyAttributes[$newKey] = $newValue;
@@ -104,7 +118,8 @@ abstract class Repository extends Models
         return $this->db->execute($sql, ['id' => $entity->id]);
     }
 
-    public function save($entity) {
+    public function save($entity)
+    {
         if (is_null($entity->id)) {
             $this->insert($entity);
         } else {
@@ -113,12 +128,15 @@ abstract class Repository extends Models
 
     }
 
-    public function getOne($id) {
+    public function getOne($id)
+    {
         $tableName = $this->getTableName();
         $sql = "SELECT * FROM {$tableName} WHERE id = :id";
         return $this->db->queryObject($sql, ['id' => $id], static::class);
     }
-    public function getAll() {
+
+    public function getAll()
+    {
         $tableName = $this->getTableName();
         $sql = "SELECT * FROM {$tableName}";
         return $this->db->queryAll($sql);

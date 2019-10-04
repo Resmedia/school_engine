@@ -20,6 +20,11 @@ class Session {
         return isset($this->session[$value]) ? $this->session[$value] : false;
     }
 
+    public function getId()
+    {
+        return session_id();
+    }
+
     public function setValue(array $params) {
         if(!empty($params)) {
             foreach ($params as $key => $param) {
