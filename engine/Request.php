@@ -3,10 +3,6 @@
 
 namespace app\engine;
 
-class RequestException extends \Exception {
-
-}
-
 class Request {
     protected $requestString;
     protected $method;

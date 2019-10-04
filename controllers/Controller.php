@@ -26,7 +26,7 @@ abstract class Controller
      * Controller constructor.
      * @param $renderer
      */
-    public function __construct(IRenderer $renderer)
+    public function __construct(IRenderer $renderer = null)
     {
         $this->cookies = new Cookies();
         $this->session = new Session();
@@ -42,7 +42,7 @@ abstract class Controller
         if (method_exists($this, $method)) {
             $this->$method();
         } else {
-            echo "404";
+            throw new \Exception('Ошибка запуска', 500);
         }
     }
 

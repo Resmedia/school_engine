@@ -3,10 +3,6 @@
 
 namespace app\engine;
 
-class SessionException extends \Exception {
-
-}
-
 class Session {
 
     private $session = [];

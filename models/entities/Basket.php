@@ -11,7 +11,6 @@ class Basket extends DataEntity
     public $session_id;
     public $product_id;
 
-
     /**
      * Basket constructor.
      * @param $session_id
@@ -22,8 +21,4 @@ class Basket extends DataEntity
         $this->session_id = $session_id;
         $this->product_id = $product_id;
     }
-
-
-
-
 }

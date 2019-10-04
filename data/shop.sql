@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.6.4
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Сен 27 2019 г., 21:16
--- Версия сервера: 8.0.15
--- Версия PHP: 7.1.22
+-- Host: localhost:3306
+-- Generation Time: Oct 02, 2019 at 11:52 PM
+-- Server version: 5.6.33
+-- PHP Version: 7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,41 +17,91 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `shop`
+-- Database: `shop`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `basket`
+-- Table structure for table `basket`
 --
 
 CREATE TABLE `basket` (
   `id` int(11) NOT NULL,
+  `count` int(11) NOT NULL DEFAULT '0',
   `session_id` text NOT NULL,
-  `product_id` int(11) NOT NULL
+  `product_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `basket`
+-- Dumping data for table `basket`
 --
 
-INSERT INTO `basket` (`id`, `session_id`, `product_id`) VALUES
-(1, '', 2),
-(2, '', 3),
-(3, 'dttavkp4q9o5igel323h36legmv08bl0', 1),
-(4, 'dttavkp4q9o5igel323h36legmv08bl0', 2),
-(5, 'dttavkp4q9o5igel323h36legmv08bl0', 4),
-(6, 'dttavkp4q9o5igel323h36legmv08bl0', 3),
-(7, 'dttavkp4q9o5igel323h36legmv08bl0', 1),
-(8, 'dttavkp4q9o5igel323h36legmv08bl0', 2),
-(9, 'dttavkp4q9o5igel323h36legmv08bl0', 1),
-(10, 'dttavkp4q9o5igel323h36legmv08bl0', 2);
+INSERT INTO `basket` (`id`, `count`, `session_id`, `product_id`, `user_id`) VALUES
+(103, 0, '9f791c98002529a7cab538451d169518', 1, NULL),
+(104, 0, '9f791c98002529a7cab538451d169518', 1, NULL),
+(105, 0, '9f791c98002529a7cab538451d169518', 1, NULL),
+(106, 0, '9f791c98002529a7cab538451d169518', 1, NULL),
+(107, 0, '9f791c98002529a7cab538451d169518', 1, NULL),
+(108, 0, '9f791c98002529a7cab538451d169518', 1, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `products`
+-- Table structure for table `menu`
+--
+
+CREATE TABLE `menu` (
+  `id` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `position` int(11) NOT NULL,
+  `status` smallint(2) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `menu`
+--
+
+INSERT INTO `menu` (`id`, `parent_id`, `name`, `url`, `position`, `status`) VALUES
+(1, 0, 'Главная', '/', 1, 1),
+(2, 0, 'Каталог', '/products', 2, 1),
+(4, 0, 'Контакты', '/contacts', 5, 1),
+(5, 0, 'Отзывы', '/feedback', 4, 1),
+(7, 2, 'Каталог 1', '/catalog_1', 0, 1),
+(8, 2, 'Каталог 2', '/catalog_2', 0, 1),
+(9, 2, 'Каталог 3', '/catalog_3', 0, 1),
+(10, 0, 'Галерея', '/gallery', 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pages`
+--
+
+CREATE TABLE `pages` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `description` text NOT NULL,
+  `status` smallint(6) NOT NULL DEFAULT '0',
+  `url` varchar(255) DEFAULT NULL,
+  `time_create` int(15) NOT NULL DEFAULT '0',
+  `time_update` int(15) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `pages`
+--
+
+INSERT INTO `pages` (`id`, `name`, `description`, `status`, `url`, `time_create`, `time_update`) VALUES
+(1, 'Контакты', '<p><b>Контактная информация магазина</b></p>\r\n<p><b>Город:</b> Москва</p>\r\n<p><b>Индекс:</b> 12206</p>\r\n<p><b>Адрес:</b> Инженерная 13</p>\r\n<p><b>Телефон:</b> +7 (212) 000-00-00</p>\r\n<p><b>E-mail:</b> test@test.test</p>\r\n<p>\r\nТоргуем всем чем можно, а также чем угодно, что может принести денежные средства :-)\r\n</p>', 1, 'contacts', 1567069450, 1567069450);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -64,7 +112,7 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `products`
+-- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`) VALUES
@@ -76,68 +124,74 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `login` text NOT NULL,
-  `pass` text NOT NULL
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `password_hash` varchar(300) DEFAULT NULL,
+  `default_hash` varchar(300) DEFAULT NULL,
+  `role` varchar(255) DEFAULT NULL,
+  `status` smallint(2) NOT NULL DEFAULT '0',
+  `time_create` int(15) NOT NULL DEFAULT '0',
+  `time_update` int(15) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `users`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `pass`) VALUES
-(1, 'admin', '123'),
-(2, 'user', '123');
+INSERT INTO `users` (`id`, `name`, `email`, `password_hash`, `default_hash`, `role`, `status`, `time_create`, `time_update`) VALUES
+(1, 'ООО КейсИС', 'resmedia@ya.ru', '$2y$10$Wa/q79mv0slwBZOwqygSj.gBQITIni4jgwSCSIlkwZC.zl6pkozsi', '3a9cba465e80ad1a052480', '2', 1, 1570034067, 1570049091),
+(2, 'Good', 'resmedia@yandex.ru', '$2y$10$Np8vDbp0ldSbIctk3IU61.2BvDz9uNiHClqm5nn2fs0AVZejmpSCa', '55fa1eaa52491923b00f3d', '2', 1, 1570034238, 1570034238),
+(4, 'Good', 'resmedia@yandex.rus', '$2y$10$3QOyiZ0TgHiQCkEQnVcHc.0hJMsPFJySyXO6q8.oLBLSTKdJ6KEza', 'dc76354288e19b9d1ce162', '2', 1, 1570034282, 1570034282),
+(6, 'ООО КейсИС', 'resmedia@yandex.com', '$2y$10$D7H98o.J0B8vjSseBsEBV.BiTUTImbNK7yf1yD4.vvOFjQG6jAPue', '68258ca55fe1fbc4f16127', '2', 1, 1570049123, 1570049123),
+(7, 'Сергей', 'sr2008@ya.ru', '$2y$10$h3mAkUbkwiBH5yQXlDMsb.2XqObXEscQL12M5q4rx9gh4xLRT4Oam', 'b5d3b5d86cf22d2e705982', '2', 1, 1570049338, 1570049338);
 
 --
--- Индексы сохранённых таблиц
+-- Indexes for dumped tables
 --
 
 --
--- Индексы таблицы `basket`
+-- Indexes for table `basket`
 --
 ALTER TABLE `basket`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `products`
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `id` (`id`);
 
 --
--- AUTO_INCREMENT для сохранённых таблиц
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT для таблицы `basket`
+-- AUTO_INCREMENT for table `basket`
 --
 ALTER TABLE `basket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 --
--- AUTO_INCREMENT для таблицы `products`
+-- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
--- AUTO_INCREMENT для таблицы `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-COMMIT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

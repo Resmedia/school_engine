@@ -16,18 +16,13 @@ class ProductController extends Controller
         echo $this->render('catalog', ['catalog' => $catalog]);
     }
 
-
-    public function actionCard() {
-        $id = $_GET['id'];
+    public function actionCard($postId = null) {
+        $id = $postId ?: $_GET['id'];
         $repo = new ProductRepository();
-
         if ($id == 0) {
             throw new \Exception("Продукт не найден", 404);
         }
         $product = $repo->getOne($id);
         echo $this->render('card', ['product' => $product]);
     }
-
-
-
 }

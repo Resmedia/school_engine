@@ -3,10 +3,6 @@
 
 namespace app\engine;
 
-class CookiesException extends \Exception {
-
-}
-
 class Cookies {
 
     private $cookies = [];
