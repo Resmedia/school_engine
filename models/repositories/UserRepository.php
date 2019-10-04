@@ -32,11 +32,12 @@ class UserRepository extends Repository
     public function getName()
     {
         $model = new UserRepository();
-        $hash = '';
+
         if ($this->cookies->getValue('hash')) {
             $hash = $this->cookies->getValue('hash');
+            $user = $model->getUserByHash($hash);
         }
-        $user = $model->getUserByHash($hash);
+
         return isset($user->name) ? $user->name : "Guest";
     }
 

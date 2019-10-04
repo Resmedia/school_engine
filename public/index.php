@@ -3,7 +3,6 @@ session_start();
 
 use app\engine\Render;
 use app\engine\Request;
-use app\engine\RequestException;
 
 try {
 
@@ -27,9 +26,7 @@ try {
 catch (\PDOException $e) {
     var_dump("Ошибка PDO");
 }
-catch (RequestException $e) {
-    var_dump("Ошибка request");
-}
+
 catch (\Exception $e) {
     var_dump($e);
     var_dump($e->getTrace());
