@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\engine\App;
 use app\models\entities\Basket;
 use app\models\entities\Goods;
 use app\models\entities\Order;
@@ -15,7 +16,7 @@ class ApiController extends Controller
     {
         $repo = new BasketRepository();
 
-        $repo->save(new Basket(session_id(), $this->request->getParams()['id']));
+        $repo->save(new Basket(session_id(), App::call()->request->getParams()['id']));
 
         $response = [
             'result' => 1,
@@ -28,12 +29,12 @@ class ApiController extends Controller
 
     public function actionOrder()
     {
-        $name = strip_tags(stripslashes($this->request->post('name')));
-        $email = strip_tags(stripslashes($this->request->post('email')));
-        $phone = strip_tags(stripslashes($this->request->post('phone')));
-        $address = strip_tags(stripslashes($this->request->post('address')));
-        $description = strip_tags(stripslashes($this->request->post('description')));
-        $goods = $this->request->post('goods');
+        $name = strip_tags(stripslashes(App::call()->request->post('name')));
+        $email = strip_tags(stripslashes(App::call()->request->post('email')));
+        $phone = strip_tags(stripslashes(App::call()->request->post('phone')));
+        $address = strip_tags(stripslashes(App::call()->request->post('address')));
+        $description = strip_tags(stripslashes(App::call()->request->post('description')));
+        $goods = App::call()->request->post('goods');
 
         if (!$phone || !$address || !$name) {
             throw new \Exception('Нет основных аттрибутов', 500);
@@ -46,13 +47,13 @@ class ApiController extends Controller
             $order->phone = $phone;
             $order->address = $address;
             $order->description = $description;
-            $order->session_id = $this->session->getId();
+            $order->session_id = App::call()->session->getId();
             $order->user_id = 0;
             $order->time_create = time();
             $order->time_update = time();
             $orderRepo->save($order);
 
-            $savedOrder = $orderRepo->getWhere('session_id', $this->session->getId());
+            $savedOrder = $orderRepo->getWhere('session_id', App::call()->session->getId());
 
             $goodsRepo = new GoodsRepository();
             $basket = new BasketRepository();
@@ -80,7 +81,7 @@ class ApiController extends Controller
     {
         $repo = new BasketRepository();
 
-        $id = $this->request->getParams()['id'];
+        $id = App::call()->request->getParams()['id'];
         $session = session_id();
 
         $repo->deleteByIdWhere($id, 'session_id', $session);

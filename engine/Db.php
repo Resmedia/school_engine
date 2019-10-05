@@ -2,20 +2,20 @@
 
 namespace app\engine;
 
-use app\traits\Tsingletone;
 
 class Db
 {
-    private $config = [
-        'driver' => 'mysql',
-        'host' => 'localhost',
-        'login' => 'root',
-        'password' => 'root',
-        'database' => 'shop',
-        'charset' => 'utf8'
-    ];
+    protected $config;
 
-    use Tsingletone;
+    public function __construct($driver, $host, $login, $password, $database, $charset = "utf8")
+    {
+        $this->config['driver'] = $driver;
+        $this->config['host'] = $host;
+        $this->config['login'] = $login;
+        $this->config['password'] = $password;
+        $this->config['database'] = $database;
+        $this->config['charset'] = $charset;
+    }
 
     private $connection = null;
 
@@ -28,7 +28,7 @@ class Db
             $this->connection->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
             $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         }
-       return $this->connection;
+        return $this->connection;
     }
 
     private function prepareDSNstring() {
@@ -45,7 +45,7 @@ class Db
         $pdoStatement->execute($params);
         return $pdoStatement;
     }
-    private function queryLimit($sql, $from, $to) {
+    public function queryLimit($sql, $from, $to) {
         $pdoStatement = $this->getConnection()->prepare($sql);
         $pdoStatement->bindValue(':from', $from, \PDO::PARAM_INT);
         $pdoStatement->bindValue(':to', $to, \PDO::PARAM_INT);

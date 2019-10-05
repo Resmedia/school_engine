@@ -13,6 +13,6 @@ class PageController extends Controller
             throw new \Exception("Страница не найдена", 404);
         }
         $model = $repo->getOne($id);
-        echo $this->render('contact', ['model' => $model]);
+        echo $this->render('page/contact', ['model' => $model]);
     }
 }

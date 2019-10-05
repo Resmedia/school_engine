@@ -3,9 +3,6 @@
 
 namespace app\controllers;
 
-use app\engine\Cookies;
-use app\engine\Request;
-use app\engine\Session;
 use app\interfaces\IRenderer;
 use app\models\repositories\BasketRepository;
 use app\models\repositories\UserRepository;
@@ -18,19 +15,12 @@ abstract class Controller
     private $useLayouts = true;
     private $renderer;
 
-    public $session;
-    public $cookies;
-    public $request;
-
     /**
      * Controller constructor.
      * @param $renderer
      */
     public function __construct(IRenderer $renderer = null)
     {
-        $this->cookies = new Cookies();
-        $this->session = new Session();
-        $this->request = new Request();
         $this->renderer = $renderer;
     }
 

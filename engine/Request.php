@@ -14,7 +14,6 @@ class Request {
     {
         $this->requestString = $_SERVER['REQUEST_URI'];
         $this->parseRequest();
-       // throw new RequestException("Ошибка Request");
     }
 
     private function parseRequest() {

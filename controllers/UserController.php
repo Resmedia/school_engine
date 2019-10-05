@@ -3,6 +3,7 @@
 
 namespace app\controllers;
 
+use app\engine\App;
 use app\models\repositories\UserRepository;
 use app\models\entities\User;
 
@@ -12,8 +13,8 @@ class UserController extends Controller
     {
         $repo = new UserRepository();
         
-        $email =  $this->request->post('email');
-        $password = $this->request->post('password');
+        $email =  App::call()->request->post('email');
+        $password = App::call()->request->post('password');
 
         $email = strip_tags(stripslashes($email));
         $email = preg_replace('/\s+/', '', $email);
@@ -42,7 +43,7 @@ class UserController extends Controller
             if ($user) {
                 if (password_verify($password, $user->password_hash)) {
                     $hash = $repo->setDefaultHash(11, $email);
-                    $this->session->setValue([
+                    App::call()->session->setValue([
                         'email' => $email,
                         'id' => $user->id
                     ]);
@@ -79,9 +80,9 @@ class UserController extends Controller
     {
         $repo = new UserRepository();
 
-        $email =  $this->request->post('email');
-        $password = $this->request->post('password');
-        $name = $this->request->post('name');
+        $email =  App::call()->request->post('email');
+        $password = App::call()->request->post('password');
+        $name = App::call()->request->post('name');
 
         $email = strip_tags(stripslashes($email));
         $name = strip_tags(stripslashes($name));
@@ -126,7 +127,7 @@ class UserController extends Controller
                 $user = $repo->getUser($email);
 
                 if($user){
-                    $this->session->setValue([
+                    App::call()->session->setValue([
                         'email' => $email,
                         'id' => $user->id
                     ]);
@@ -164,9 +165,9 @@ class UserController extends Controller
     }
 
     public function actionLogout() {
-        $this->session->destroy();
-        $this->cookies->setCookies("hash", '');
-        $this->request->redirect('/');
+        App::call()->session->destroy();
+        App::call()->cookies->setCookies("hash", '');
+        App::call()->request->redirect('/');
         exit();
     }
 }

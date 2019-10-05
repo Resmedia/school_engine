@@ -2,9 +2,7 @@
 
 namespace app\models;
 
-use app\engine\Cookies;
-use app\engine\Db;
-use app\engine\Session;
+use app\engine\App;
 use app\models\entities\DataEntity;
 
 /**
@@ -13,44 +11,33 @@ use app\models\entities\DataEntity;
  */
 abstract class Repository extends Models
 {
-    protected $db;
-
-    public $session;
-    public $cookies;
-
-    public function __construct()
-    {
-        $this->cookies = new Cookies();
-        $this->session = new Session();
-        $this->db = Db::getInstance();
-    }
 
     public function deleteByIdWhere($id, $field, $value)
     {
         $tableName = $this->getTableName();
         $sql = "DELETE FROM {$tableName} WHERE id = :id  AND `$field`=:$field";
-        return $this->db->execute($sql, ['id' => $id, "$field" => $value]);
+        return App::call()->db->execute($sql, ['id' => $id, "$field" => $value]);
     }
 
     public function getCountWhere($field, $value)
     {
         $tableName = $this->getTableName();
         $sql = "SELECT count(*) as count FROM {$tableName} WHERE `$field`=:$field";
-        return $this->db->queryOne($sql, ["$field" => $value])['count'];
+        return App::call()->db->queryOne($sql, ["$field" => $value])['count'];
     }
 
     public function getLimit($from, $to)
     {
         $tableName = $this->getTableName();
         $sql = "SELECT * FROM {$tableName} LIMIT :from, :to";
-        return $this->db->queryLimit($sql, $from, $to);
+        return App::call()->db->queryLimit($sql, $from, $to);
     }
 
     public function getWhere($field, $value)
     {
         $tableName = $this->getTableName();
         $sql = "SELECT * FROM {$tableName} WHERE `$field`=:$field";
-        return $this->db->queryObject($sql, ["$field" => $value], $this->getEntityClass());
+        return App::call()->db->queryObject($sql, ["$field" => $value], $this->getEntityClass());
     }
 
     public function insert(DataEntity $entity)
@@ -69,21 +56,21 @@ abstract class Repository extends Models
         $strAttr = implode(', ', $attr);
 
         $sql = "INSERT INTO {$tableName} ({$strKeys}) VALUES ({$strAttr})";
-        return $this->db->execute($sql);
+        return App::call()->db->execute($sql);
     }
 
     public function delete($entity)
     {
         $tableName = $this->getTableName();
         $sql = "DELETE FROM {$tableName} WHERE id = :id";
-        return $this->db->execute($sql, ['id' => $entity->id]);
+        return App::call()->db->execute($sql, ['id' => $entity->id]);
     }
 
     public function deleteById($id)
     {
         $tableName = $this->getTableName();
         $sql = "DELETE FROM {$tableName} WHERE id = :id";
-        return $this->db->execute($sql, ['id' => $id]);
+        return App::call()->db->execute($sql, ['id' => $id]);
     }
 
     public function update(DataEntity $entity)
@@ -115,7 +102,7 @@ abstract class Repository extends Models
 
         $strUpdate = implode(', ', $update);
         $sql = "UPDATE {$tableName} SET {$strUpdate} WHERE `id` = :id";
-        return $this->db->execute($sql, ['id' => $entity->id]);
+        return App::call()->db->execute($sql, ['id' => $entity->id]);
     }
 
     public function save($entity)
@@ -132,14 +119,14 @@ abstract class Repository extends Models
     {
         $tableName = $this->getTableName();
         $sql = "SELECT * FROM {$tableName} WHERE id = :id";
-        return $this->db->queryObject($sql, ['id' => $id], static::class);
+        return App::call()->db->queryObject($sql, ['id' => $id], static::class);
     }
 
     public function getAll()
     {
         $tableName = $this->getTableName();
         $sql = "SELECT * FROM {$tableName}";
-        return $this->db->queryAll($sql);
+        return App::call()->db->queryAll($sql);
     }
 
 }

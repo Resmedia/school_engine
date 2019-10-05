@@ -9,7 +9,7 @@ class Render implements IRenderer
     public function renderTemplate($template, $params = []) {
         ob_start();
         extract($params);
-        $templatePath = TEMPLATES_DIR . $template . ".php";
+        $templatePath = App::call()->config['templates_dir'] . $template . ".php";
         include $templatePath;
         return ob_get_clean();
     }

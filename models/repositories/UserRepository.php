@@ -3,6 +3,7 @@
 
 namespace app\models\repositories;
 
+use app\engine\App;
 use app\models\entities\User;
 use app\models\Repository;
 use ErrorException;
@@ -18,11 +19,11 @@ class UserRepository extends Repository
     {
         $model = new UserRepository();
 
-        if ($this->cookies->getValue('hash')) {
-            $hash = $this->cookies->getValue('hash');
+        if (App::call()->cookies->getValue('hash')) {
+            $hash = App::call()->cookies->getValue('hash');
             $user = $model->getUserByHash($hash);
-            if ($this->session->getValue('email') &&
-                $this->session->getValue('email') == $user->email) {
+            if (App::call()->session->getValue('email') &&
+                App::call()->session->getValue('email') == $user->email) {
                 return true;
             }
         }
@@ -33,8 +34,8 @@ class UserRepository extends Repository
     {
         $model = new UserRepository();
 
-        if ($this->cookies->getValue('hash')) {
-            $hash = $this->cookies->getValue('hash');
+        if (App::call()->cookies->getValue('hash')) {
+            $hash = App::call()->cookies->getValue('hash');
             $user = $model->getUserByHash($hash);
         }
 
