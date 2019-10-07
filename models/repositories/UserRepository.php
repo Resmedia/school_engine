@@ -4,10 +4,14 @@
 namespace app\models\repositories;
 
 use app\engine\App;
+use app\models\entities\Order;
 use app\models\entities\User;
 use app\models\Repository;
 use ErrorException;
 
+/**
+ * @property int $status
+ */
 class UserRepository extends Repository
 {
     public function getTableName()
@@ -27,6 +31,28 @@ class UserRepository extends Repository
                 return true;
             }
         }
+        return false;
+    }
+
+    public function isAdmin()
+    {
+        if ($this->isAuth()) {
+
+            $hash = App::call()->cookies->getValue('hash');
+
+            if ($hash) {
+                $user = App::call()->userRepository->getUserByHash($hash);
+
+                if(!empty($user)) {
+                    return $user->role == User::ROLE_ADMIN;
+                }
+
+                throw new ErrorException('Нет такого пользователя!', 404);
+            }
+
+            throw new ErrorException('Нет хеша!', 500);
+        }
+
         return false;
     }
 

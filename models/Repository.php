@@ -40,6 +40,14 @@ abstract class Repository extends Models
         return App::call()->db->queryObject($sql, ["$field" => $value], $this->getEntityClass());
     }
 
+    public function getWhereAll($field, $value)
+    {
+        $tableName = $this->getTableName();
+        $sql = "SELECT * FROM {$tableName} WHERE `$field`=:$field";
+        return App::call()->db->queryAll($sql, ["$field" => $value]);
+    }
+
+
     public function insert(DataEntity $entity)
     {
         $keys = [];
@@ -64,6 +72,13 @@ abstract class Repository extends Models
         $tableName = $this->getTableName();
         $sql = "DELETE FROM {$tableName} WHERE id = :id";
         return App::call()->db->execute($sql, ['id' => $entity->id]);
+    }
+
+    public function deleteAllWhere($field, $value)
+    {
+        $tableName = $this->getTableName();
+        $sql = "DELETE FROM {$tableName} WHERE `$field`=:$field";
+        return App::call()->db->execute($sql, ["$field" => $value]);
     }
 
     public function deleteById($id)

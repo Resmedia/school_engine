@@ -5,6 +5,8 @@ namespace app\engine;
 
 
 use app\models\repositories\BasketRepository;
+use app\models\repositories\GoodsRepository;
+use app\models\repositories\OrderRepository;
 use app\models\repositories\ProductRepository;
 use app\models\repositories\UserRepository;
 use app\traits\Tsingletone;
@@ -15,6 +17,8 @@ use app\traits\Tsingletone;
  * @property BasketRepository $basketRepository
  * @property UserRepository $userRepository
  * @property ProductRepository $productRepository
+ * @property OrderRepository $orderRepository
+ * @property GoodsRepository $goodsRepository
  * @property Cookies $cookies
  * @property Session $session
  * @property Db $db
@@ -78,7 +82,7 @@ class App
             $controller = new $controllerClass(new Render());
             $controller->runAction($this->action);
         } else {
-            echo "Не правильный контроллер";
+            echo "Неправильный контроллер";
         }
     }
 

@@ -13,6 +13,7 @@ namespace app\models\entities;
  * @param string $address
  * @param string $email
  * @param string $phone
+ * @param string $status
  * @param int $time_create
  * @param int $time_update
  */
@@ -27,8 +28,12 @@ class Order extends DataEntity
     public $address;
     public $email;
     public $phone;
+    public $status;
     public $time_create;
     public $time_update;
+
+    const STATUS_ACTIVE = 1;
+    const STATUS_DONE = 0;
 
     public function __construct(
         $id = null,
@@ -39,6 +44,7 @@ class Order extends DataEntity
         $address = null,
         $email = null,
         $phone = null,
+        $status = 0,
         $time_create = null,
         $time_update = null
     )
@@ -51,6 +57,7 @@ class Order extends DataEntity
         $this->address = $address;
         $this->email = $email;
         $this->phone = $phone;
+        $this->status = $status;
         $this->time_create = $time_create;
         $this->time_update = $time_update;
     }

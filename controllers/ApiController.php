@@ -6,15 +6,13 @@ use app\engine\App;
 use app\models\entities\Basket;
 use app\models\entities\Goods;
 use app\models\entities\Order;
-use app\models\repositories\BasketRepository;
-use app\models\repositories\GoodsRepository;
-use app\models\repositories\OrderRepository;
+use Exception;
 
 class ApiController extends Controller
 {
     public function actionAddBasket()
     {
-        $repo = new BasketRepository();
+        $repo = App::call()->basketRepository;
 
         $repo->save(new Basket(session_id(), App::call()->request->getParams()['id']));
 
@@ -40,46 +38,66 @@ class ApiController extends Controller
             throw new \Exception('Нет основных аттрибутов', 500);
         } else {
 
-            $order = new Order();
-            $orderRepo = new OrderRepository();
-            $order->name = $name;
-            $order->email = $email;
-            $order->phone = $phone;
-            $order->address = $address;
-            $order->description = $description;
-            $order->session_id = App::call()->session->getId();
-            $order->user_id = 0;
-            $order->time_create = time();
-            $order->time_update = time();
-            $orderRepo->save($order);
+            $existOrder = App::call()->orderRepository->getWhere('session_id', App::call()->session->getId());
+            $savedOrder = null;
 
-            $savedOrder = $orderRepo->getWhere('session_id', App::call()->session->getId());
+            if(empty($existOrder) ||
+                (!empty($existOrder) && $existOrder->status == Order::STATUS_DONE)
+            ) {
+                $order = new Order();
+                $orderRepo = App::call()->orderRepository;
+                $order->name = $name;
+                $order->email = $email;
+                $order->phone = $phone;
+                $order->address = $address;
+                $order->description = $description;
+                $order->session_id = App::call()->session->getId();
+                $order->user_id = 0;
+                $order->status = Order::STATUS_ACTIVE;
+                $order->time_create = time();
+                $order->time_update = time();
+                $orderRepo->save($order);
 
-            $goodsRepo = new GoodsRepository();
-            $basket = new BasketRepository();
-            if (!empty($goods)) {
-                foreach ($goods[0] as $good) {
-                    $newGood = new Goods();
-                    $newGood->order_id = $savedOrder->id;
-                    $newGood->product_id = $good;
-                    $goodsRepo->save($newGood);
-                    // TODO Look why not delet
-                    $basket->deleteById(intval($good));
-                }
+                $savedOrder = $orderRepo->getWhere('session_id', App::call()->session->getId());
             }
 
-            $result = [
-                'status' => true,
-                'order_id' => $savedOrder->id,
-            ];
+            $id = !empty($existOrder) && $existOrder->status != Order::STATUS_DONE ? $existOrder->id : $savedOrder->id;
 
-            echo json_encode($result);
+            $goodsRepo = App::call()->goodsRepository;
+            if (!empty($goods)) {
+                foreach ($goods as $good) {
+                    $newGood = new Goods();
+                    $newGood->order_id = $id;
+                    $newGood->product_id = $good['id_prod'];
+                    $goodsRepo->save($newGood);
+                }
+
+                $this->actionCleanBasket();
+
+                $result = [
+                    'status' => true,
+                    'order_id' => $id,
+                ];
+
+                echo json_encode($result);
+            }
         }
+    }
+
+    public function actionCleanBasket()
+    {
+        $repo = App::call()->basketRepository;
+
+        $session = session_id();
+
+        $repo->deleteAllWhere('session_id', $session);
+
+        return true;
     }
 
     public function actionRemoveFromBasket()
     {
-        $repo = new BasketRepository();
+        $repo = App::call()->basketRepository;
 
         $id = App::call()->request->getParams()['id'];
         $session = session_id();
@@ -95,5 +113,41 @@ class ApiController extends Controller
         echo json_encode($response);
 
         exit;
+    }
+
+    public function actionRemoveOrder()
+    {
+        if(!App::call()->userRepository->isAdmin()){
+            throw new Exception('Вы не администратор!', 403);
+        }
+
+        $id = (int)App::call()->request->post('id');
+        if($id){
+            App::call()->orderRepository->deleteById($id);
+            App::call()->goodsRepository->deleteAllWhere('order_id', $id);
+
+            echo json_encode(['status' => true]);
+            return true;
+        }
+        throw new Exception("Нет такого продукта", 404);
+    }
+
+    public function actionOrderDone()
+    {
+        if(!App::call()->userRepository->isAdmin()){
+            throw new Exception('Вы не администратор!', 403);
+        }
+
+        $id = (int)App::call()->request->post('id');
+        if($id){
+            $order = new Order();
+            $order->id = $id;
+            $order->status = Order::STATUS_DONE;
+            App::call()->orderRepository->save($order);
+
+            echo json_encode(['status' => true]);
+            return true;
+        }
+        throw new \Exception("Нет такого продукта", 404);
     }
 }

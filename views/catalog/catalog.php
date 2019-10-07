@@ -1,9 +1,28 @@
+<br/>
 <h2>Каталог</h2>
-<? foreach ($catalog as $item): ?>
-    <a href="/product/card/?id=<?= $item['id'] ?>"><h3><?= $item['name'] ?></h3></a>
-    <p>Цена: <?= $item['price'] ?></p>
-    <button data-id="<?= $item['id'] ?>" class="buy">Купить</button>
-<? endforeach; ?>
+<br/>
+<div class="row">
+    <? foreach ($catalog as $item): ?>
+        <div class="col-3">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="/product/card/?id=<?= $item['id'] ?>">
+                            <?= $item['name'] ?>
+                        </a>
+                    </h5>
+                    <p class="card-text">
+                        Цена: <?= $item['price'] ?>
+                    </p>
+                    <button data-id="<?= $item['id'] ?>" class="btn col-12 btn-primary stretched-link buy">Купить</button>
+                </div>
+            </div>
+            <br/>
+        </div>
+    <? endforeach; ?>
+</div>
+
 
 <script>
     let buttons = document.querySelectorAll('.buy');

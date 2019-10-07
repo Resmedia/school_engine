@@ -9,6 +9,9 @@ const signName = $('#sign-name');
 const signPassword = $('#sign-password');
 const signBtn = $('#sign-btn');
 
+const statusDone = $('#status-done');
+const deleteOrder = $('#delete-order');
+
 loginEmail.on('input', () => removeError(loginForm, loginEmail));
 loginPassword.on('input', () => removeError(loginForm, loginPassword));
 signEmail.on('input', () => removeError(signForm, signEmail));
@@ -122,3 +125,38 @@ setCookie = (cname, cvalue, exdays) => {
 
 isValidEmail = email => !!email.match(/@.+\./);
 isValidPassword = password => !password.match(/\s/);
+
+deleteOrder.on('click', data => {
+    let id = data.target.dataset.id;
+    let confirmDelete = confirm(`Вы уверены, что хотите удалить заказ № ${id}?`);
+    if(confirmDelete) {
+        $.ajax({
+            url: 'Api/RemoveOrder',
+            method: 'post',
+            data: {
+                id
+            }
+        }).then(data => {
+            let newData = JSON.parse(data);
+            if (newData.status){
+                document.location.reload(true);
+            }
+        })
+    }
+});
+
+statusDone.on('click', data => {
+    let id = data.target.dataset.id;
+    $.ajax({
+        url: 'Api/OrderDone',
+        method: 'post',
+        data: {
+            id
+        }
+    }).then(data => {
+        let newData = JSON.parse(data);
+        if (newData.status){
+            document.location.reload(true);
+        }
+    })
+});
